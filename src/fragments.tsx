@@ -35,11 +35,19 @@ export const FRAGMENT_FULL_PODCAST = gql`
       portrait
       name
     }
-    episodes {
+  }
+`;
+
+export const FRAGMENT_REVIEW = gql`
+  fragment PartReview on Review {
+    id
+    content
+    rating
+    reviewer {
       id
-      title
-      description
-      playLength
+      name
+      email
+      portrait
     }
   }
 `;
@@ -56,6 +64,28 @@ export const FRAGMENT_EPISODE = gql`
       title
       category
       thumbnail
+    }
+  }
+`;
+
+export const FRAGMENT_FULL_EPISODE = gql`
+  fragment FullEpisode on Episode {
+    id
+    title
+    description
+    playLength
+    createdAt
+    podcast {
+      id
+      title
+      category
+      thumbnail
+      host {
+        id
+        email
+        name
+        portrait
+      }
     }
   }
 `;

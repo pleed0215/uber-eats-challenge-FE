@@ -14,25 +14,33 @@ export const Header = () => {
           <Link to="/" className="mr-6">
             <div
               className="w-10 h-10 bg-cover bg-center animate-bounce"
-              style={{ backgroundImage: `url(podcast.svg)` }}
+              style={{ backgroundImage: `url(/podcast.svg)` }}
             />
           </Link>
 
           <ul className="flex items-center justify-around w-full">
-            <Link to="/">
+            <Link
+              to="/"
+              className="hover:scale-y-125 transform transition duration-300"
+            >
               <li
                 className={`pb-2 ${
-                  pathname === "/" && "border-b-4 border-purple-400"
+                  pathname === "/" && "border-b-4 border-purple-400 "
                 }`}
               >
                 Now Listen
               </li>
             </Link>
             {categories.map((category, index) => (
-              <Link to={`/category?name=${category}`} key={index}>
+              <Link
+                to={`/category?name=${category}`}
+                key={index}
+                className="hover:scale-y-125 transform transition duration-300"
+              >
                 <li
                   className={`pb-2 ${
-                    pathname === category && "border-b-4 border-purple-400"
+                    pathname === `/category?name=${category}` &&
+                    "border-b-4 border-purple-400"
                   }`}
                 >
                   {category.toUpperCase()}

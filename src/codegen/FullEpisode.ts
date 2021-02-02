@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: FullPodcast
+// GraphQL fragment: FullEpisode
 // ====================================================
 
-export interface FullPodcast_host {
+export interface FullEpisode_podcast_host {
   __typename: "User";
   id: number;
   email: string;
@@ -15,21 +15,21 @@ export interface FullPodcast_host {
   portrait: string | null;
 }
 
-export interface FullPodcast_listeners {
-  __typename: "User";
-  id: number;
-  email: string;
-  portrait: string | null;
-  name: string | null;
-}
-
-export interface FullPodcast {
+export interface FullEpisode_podcast {
   __typename: "Podcast";
   id: number;
   title: string;
   category: string;
-  description: string | null;
   thumbnail: string | null;
-  host: FullPodcast_host;
-  listeners: FullPodcast_listeners[] | null;
+  host: FullEpisode_podcast_host;
+}
+
+export interface FullEpisode {
+  __typename: "Episode";
+  id: number;
+  title: string;
+  description: string | null;
+  playLength: number | null;
+  createdAt: any;
+  podcast: FullEpisode_podcast;
 }

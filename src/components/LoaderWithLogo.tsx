@@ -29,7 +29,7 @@ export const LoaderWithLogo = () => {
     <div className="absolute w-screen h-screen bg-opacity-10 bg-gray-600 flex justify-center items-center inset-0">
       <div className="w-60 h-60 rounded-lg bg-white flex flex-col items-center justify-center z-50">
         <img
-          src="podcast.svg"
+          src="/podcast.svg"
           width="80px"
           height="80px"
           className="animate-bounce mb-6"
