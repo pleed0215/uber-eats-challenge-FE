@@ -125,9 +125,6 @@ export const PodcastPage = () => {
   };
 
   const onNext = () => {
-    console.log(episodes);
-    console.log(page);
-
     if (episodes && reviews) {
       const totalPage =
         whichTab === "episodes"
