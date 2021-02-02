@@ -1,0 +1,32 @@
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Header } from "../components/Header";
+
+import { LogoutPage } from "../pages/logout";
+import { PageNotFound } from "../pages/404";
+import { HomePage } from "../pages/home/home";
+import { PodcastPage } from "../pages/home/podcast";
+import { Footer } from "../components/footer";
+
+export const LoggedInRouter = () => {
+  return (
+    <Router>
+      <Header />
+      <Switch>
+        <Route path="/podcast/:id" exact>
+          <PodcastPage />
+        </Route>
+        <Route path="/logout" exact>
+          <LogoutPage />
+        </Route>
+        <Route path="/" exact>
+          <HomePage />
+        </Route>
+        <Route>
+          <PageNotFound />
+        </Route>
+      </Switch>
+      <Footer />
+    </Router>
+  );
+};

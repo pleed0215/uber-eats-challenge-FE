@@ -1,0 +1,24 @@
+.animate__little_swing {
+  animation: little-swing 2s linear infinite reverse;
+}
+
+@keyframes little-swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-15deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  75% {
+    transform: rotate(15deg);
+  }
+
+  0% {
+    transform: rotate(0deg);
+  }
+}
