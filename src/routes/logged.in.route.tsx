@@ -7,12 +7,16 @@ import { PageNotFound } from "../pages/404";
 import { HomePage } from "../pages/home/home";
 import { PodcastPage } from "../pages/home/podcast";
 import { Footer } from "../components/footer";
+import { EpisodePage } from "../pages/home/episode";
 
 export const LoggedInRouter = () => {
   return (
     <Router>
       <Header />
       <Switch>
+        <Route path="/podcast/:podcastId/episodes/:episodeId" exact>
+          <EpisodePage />
+        </Route>
         <Route path="/podcast/:id" exact>
           <PodcastPage />
         </Route>

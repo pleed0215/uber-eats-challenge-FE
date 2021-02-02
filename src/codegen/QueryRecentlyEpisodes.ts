@@ -3,9 +3,19 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { UserRole } from "./globalTypes";
+
 // ====================================================
 // GraphQL query operation: QueryRecentlyEpisodes
 // ====================================================
+
+export interface QueryRecentlyEpisodes_getRecentlyEpisodes_episodes_podcast_host {
+  __typename: "User";
+  id: number;
+  email: string;
+  name: string | null;
+  role: UserRole;
+}
 
 export interface QueryRecentlyEpisodes_getRecentlyEpisodes_episodes_podcast {
   __typename: "Podcast";
@@ -13,6 +23,7 @@ export interface QueryRecentlyEpisodes_getRecentlyEpisodes_episodes_podcast {
   title: string;
   category: string;
   thumbnail: string | null;
+  host: QueryRecentlyEpisodes_getRecentlyEpisodes_episodes_podcast_host;
 }
 
 export interface QueryRecentlyEpisodes_getRecentlyEpisodes_episodes {

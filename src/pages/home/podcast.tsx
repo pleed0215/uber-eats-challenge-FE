@@ -1,4 +1,6 @@
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -18,6 +20,8 @@ import { HelmetOnlyTitle } from "../../components/HelmetOnlyTitle";
 import { LoaderWithLogo } from "../../components/LoaderWithLogo";
 import { Pagination } from "../../components/Pagination";
 import { PodcastTitle } from "../../components/PodcastTitle";
+import { ReviewItem } from "../../components/ReviewItem";
+import { ReviewList } from "../../components/ReviewList";
 import {
   FRAGMENT_EPISODE,
   FRAGMENT_PODCAST,
@@ -36,7 +40,7 @@ const GQL_GET_PODCAST = gql`
   }
   ${FRAGMENT_PODCAST}
 `;
-const GQL_GET_EPISODES = gql`
+export const GQL_GET_EPISODES = gql`
   query QueryGetEpisodes($podcastId: Int!, $page: Int!) {
     getEpisodes(input: { podcastId: $podcastId, page: $page }) {
       ok
@@ -143,34 +147,36 @@ export const PodcastPage = () => {
           podcast={podcast?.getPodcast.podcast}
           loading={loadingPodcast}
         />
-        <div className="h-10 border-b border-purple-200 my-6 flex justify-center items-center text-white">
-          <button
-            className={`py-2 px-10 ${
-              whichTab === "episodes"
-                ? "bg-purple-600 cursor-default"
-                : "bg-purple-400"
-            } text-white rounded-tr-lg rounded-tl-lg `}
-            onClick={onEpisodesClick}
-          >
-            Episodes
-          </button>
-          <button
-            className={`px-10 py-2 text-white  ${
-              whichTab === "reviews"
-                ? "bg-purple-600 cursor-default"
-                : "bg-purple-400"
-            } text-white rounded-tr-lg rounded-tl-lg `}
-            onClick={onReviewsClick}
-          >
-            Reviews
-          </button>
-        </div>
+        {!loadingPodcast && !loadingEpispde && !loadingReview && (
+          <div className="h-10 border-b border-purple-200 mt-10 flex justify-center items-center text-white">
+            <button
+              className={`py-2 px-10 ${
+                whichTab === "episodes"
+                  ? "bg-purple-600 cursor-default underline font-semibold"
+                  : "bg-purple-400"
+              } text-white rounded-tr-lg rounded-tl-lg `}
+              onClick={onEpisodesClick}
+            >
+              Episodes
+            </button>
+            <button
+              className={`px-10 py-2 text-white  ${
+                whichTab === "reviews"
+                  ? "bg-purple-600 cursor-default underline font-semibold"
+                  : "bg-purple-400"
+              } text-white rounded-tr-lg rounded-tl-lg `}
+              onClick={onReviewsClick}
+            >
+              Reviews
+            </button>
+          </div>
+        )}
         {whichTab === "episodes" && (
           <>
             <EpisodeList
               episodes={episodes?.getEpisodes.episodes}
               loading={loadingEpispde}
-              title={`${episodes?.getEpisodes.totalCount} Episodes (Page ${page}/${episodes?.getEpisodes.totalPage})`}
+              title={`${episodes?.getEpisodes.totalCount} Episodes (Page ${page} of ${episodes?.getEpisodes.totalPage})`}
             />
             <div className="w-full flex justify-center">
               <Pagination
@@ -184,7 +190,19 @@ export const PodcastPage = () => {
         )}
         {whichTab === "reviews" && (
           <>
-            <div>hello</div>
+            <ReviewList
+              reviews={reviews?.seePodcastReviews.reviews}
+              loading={loadingReview}
+              title={`${reviews?.seePodcastReviews.totalCount} Reviews (Page ${reviews?.seePodcastReviews.currentPage} of ${reviews?.seePodcastReviews.totalPage})`}
+            />
+            <div className="w-full flex justify-center">
+              <Pagination
+                onNext={onNext}
+                onPrev={onPrev}
+                totalPage={reviews?.seePodcastReviews.totalPage}
+                currentPage={page}
+              />
+            </div>
           </>
         )}
       </div>

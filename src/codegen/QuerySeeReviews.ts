@@ -27,6 +27,10 @@ export interface QuerySeeReviews_seePodcastReviews {
   __typename: "SeePodcastReviewsOutput";
   ok: boolean;
   error: string | null;
+  totalPage: number | null;
+  totalCount: number | null;
+  currentPage: number | null;
+  currentCount: number | null;
   reviews: QuerySeeReviews_seePodcastReviews_reviews[] | null;
 }
 

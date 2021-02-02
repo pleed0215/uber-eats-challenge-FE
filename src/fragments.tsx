@@ -64,6 +64,12 @@ export const FRAGMENT_EPISODE = gql`
       title
       category
       thumbnail
+      host {
+        id
+        email
+        name
+        role
+      }
     }
   }
 `;

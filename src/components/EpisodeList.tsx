@@ -27,9 +27,6 @@ export const EpisodeList: React.FC<IEpisodeList> = ({
         </>
       ) : (
         <>
-          {Array.from(Array(7).keys()).map((_, index) => (
-            <div key={index} className="w-full bg-purple-200 animate-pulse" />
-          ))}
           <h4 className="text-2xl mb-4 font-bold">{title}</h4>
           {episodes?.map((episode) => (
             <EpisodeItem key={`episode-${episode.id}`} episode={episode} />

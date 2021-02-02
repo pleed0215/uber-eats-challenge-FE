@@ -18,16 +18,16 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
   loading,
 }) => {
   return (
-    <div className="w-full h-60 text-white">
+    <div className="w-full text-white">
       {loading ? (
-        <div className="w-full h-60 bg-purple-100 animate-pulse"></div>
+        <div className="w-full h-72 bg-purple-100 animate-pulse"></div>
       ) : (
         <div className="w-full px-4 py-4 flex">
           <div
             className="w-32 h-32 bg-cover bg-center rounded-lg mr-3"
             style={{ backgroundImage: `url(${podcast?.thumbnail})` }}
           />
-          <div className="w-2/3 max-w-2/3 flex flex-col overflow-ellipsis">
+          <div className="w-2/3 max-w-2/3 h-30 flex flex-col overflow-scroll">
             <h4 className="text-2xl font-semibold mb-2">{podcast?.title}</h4>
             <p className="text-lg text-purple-200 font-bold mb-2">
               {podcast?.host.email}
