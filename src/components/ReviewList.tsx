@@ -39,7 +39,7 @@ export const ReviewList: React.FC<ReviewListProps> = ({
           <h4 className="text-2xl mb-4 font-bold text-white">{title}</h4>
           <div className="w-full flex flex-col">
             {reviews?.map((review, index) => (
-              <ReviewItem key={index} review={review} />
+              <ReviewItem key={`review-${review.id}`} review={review} />
             ))}
           </div>
         </>

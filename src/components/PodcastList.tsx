@@ -26,7 +26,11 @@ export const PodcastList: React.FC<IPodcastList> = ({
           </>
         ) : (
           podcasts?.map((podcast, index) => (
-            <Link key={index} to={`/podcast/${podcast.id}`}>
+            <Link
+              key={index}
+              to={`/podcast/${podcast.id}`}
+              className="hover:scale-110 transform duration-300"
+            >
               <div
                 className="bg-blue-100 h-52 rounded-lg bg-cover bg-center flex items-end"
                 style={{ backgroundImage: `url(${podcast.thumbnail})` }}

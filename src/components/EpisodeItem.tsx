@@ -30,7 +30,7 @@ export const EpisodeItem: React.FC<IEpisodeItem> = ({ episode }) => {
             <p className="text-md">{timeSince(episode?.createdAt)} ago</p>
           </div>
         </div>
-        <div className="flex flex-col mb-2 overflow-y-scroll h-30">
+        <div className="flex flex-col mb-2 h-30">
           <h4 className="text-2xl font-semibold">{episode?.title}</h4>
           <p className="text-md overflow-ellipsis">{episode?.description}</p>
         </div>

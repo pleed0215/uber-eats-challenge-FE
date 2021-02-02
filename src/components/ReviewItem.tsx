@@ -25,7 +25,11 @@ export const ReviewItem: React.FC<ReveiwItemProps> = ({ review }) => {
           <div className="flex items-center">
             <p className="text-md mr-2">Rating: </p>
             {Array.from(Array(review?.rating).keys()).map((_, i) => (
-              <FontAwesomeIcon className="mr-1 text-yellow-100" icon={faStar} />
+              <FontAwesomeIcon
+                key={`${review?.id}-rating-${i}`}
+                className="mr-1 text-yellow-100"
+                icon={faStar}
+              />
             ))}
           </div>
         </div>

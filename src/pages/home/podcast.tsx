@@ -99,7 +99,6 @@ export const PodcastPage = () => {
     if (whichTab === "episodes") {
       getEpisodes({ variables: { podcastId: +id, page } });
     } else {
-      console.log(error);
       getReviews({ variables: { podcastId: +id, page } });
     }
   }, [whichTab, page]);
@@ -126,15 +125,20 @@ export const PodcastPage = () => {
   };
 
   const onNext = () => {
-    if (episodes) {
-      if (page < (episodes?.getEpisodes?.totalPage || 0)) {
+    console.log(episodes);
+    console.log(page);
+
+    if (episodes && reviews) {
+      const totalPage =
+        whichTab === "episodes"
+          ? episodes?.getEpisodes?.totalPage
+          : reviews?.seePodcastReviews.totalPage;
+      if (page < (totalPage || 0)) {
         setPage(page + 1);
       }
     }
     window.scrollTo(0, 0);
   };
-
-  console.log(reviews);
 
   return (
     <div className="w-screen min-h-screen bg-gray-800 flex flex-col items-center relative">
@@ -148,7 +152,7 @@ export const PodcastPage = () => {
           loading={loadingPodcast}
         />
         {!loadingPodcast && !loadingEpispde && !loadingReview && (
-          <div className="h-10 border-b border-purple-200 mt-10 flex justify-center items-center text-white">
+          <div className="h-10 border-b border-purple-200 mt-10 flex justify-center items-center text-white mb-4">
             <button
               className={`py-2 px-10 ${
                 whichTab === "episodes"
