@@ -4,6 +4,7 @@ import { render } from "react-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { apolloClient } from "./apollo";
 import App from "./components/App";
+import "./index.css";
 
 const rootElement = document.getElementById("root");
 render(

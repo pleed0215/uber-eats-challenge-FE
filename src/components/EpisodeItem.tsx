@@ -16,7 +16,7 @@ interface IEpisodeItem {
 
 export const EpisodeItem: React.FC<IEpisodeItem> = ({ episode }) => {
   return (
-    <div className="bflex flex-col text-white h-70 p-2 my-3">
+    <div className="flex flex-col text-white h-70 p-3 my-3 border rounded-lg">
       <Link to={`/podcast/${episode?.podcast.id}/episodes/${episode?.id}`}>
         <div className="flex items-center mb-4">
           <div

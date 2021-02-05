@@ -8,12 +8,16 @@ import { HomePage } from "../pages/home/home";
 import { PodcastPage } from "../pages/home/podcast";
 import { Footer } from "../components/footer";
 import { EpisodePage } from "../pages/home/episode";
+import { CategoryPage } from "../pages/home/category";
 
 export const LoggedInRouter = () => {
   return (
     <Router>
       <Header />
       <Switch>
+        <Route path="/category" exact>
+          <CategoryPage />
+        </Route>
         <Route path="/podcast/:podcastId/episodes/:episodeId" exact>
           <EpisodePage />
         </Route>

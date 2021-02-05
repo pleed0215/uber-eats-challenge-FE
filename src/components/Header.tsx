@@ -4,8 +4,8 @@ import { useMe } from "../hooks/useMe";
 
 export const Header = () => {
   const { data, loading } = useMe();
-  const categories = ["book", "fashion", "comedy", "medicine", "music"];
-  const { pathname } = useLocation();
+  const categories = ["Book", "Fashion", "Comedy", "Medicine", "Music"];
+  const { pathname, search } = useLocation();
 
   return (
     <div className="w-full flex justify-center bg-gray-800 shadow-lg border-b-2 border-gray-500 min-w-max">
@@ -31,25 +31,33 @@ export const Header = () => {
                 Now Listen
               </li>
             </Link>
-            {categories.map((category, index) => (
-              <Link
-                to={`/category?name=${category}`}
-                key={index}
-                className="hover:scale-y-125 transform transition duration-300"
+            <Link
+              to="/category"
+              className="hover:scale-y-125 transform transition duration-300"
+            >
+              <li
+                className={`pb-2 ${
+                  pathname === "/category" && "border-b-4 border-purple-400 "
+                }`}
               >
-                <li
-                  className={`pb-2 ${
-                    pathname === `/category?name=${category}` &&
-                    "border-b-4 border-purple-400"
-                  }`}
-                >
-                  {category.toUpperCase()}
-                </li>
-              </Link>
-            ))}
+                Categories
+              </li>
+            </Link>
+            <Link
+              to="/search"
+              className="hover:scale-y-125 transform transition duration-300"
+            >
+              <li
+                className={`pb-2 ${
+                  pathname === "/search" && "border-b-4 border-purple-400 "
+                }`}
+              >
+                Search
+              </li>
+            </Link>
           </ul>
         </div>
-        <div className="flex items-center font-bold text-white">
+        <div className="flex items-center font-bold text-white min-w-max">
           <div className="mr-2 hover:underline">
             {data &&
               loading === false &&

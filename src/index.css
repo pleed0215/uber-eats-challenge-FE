@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+
+.layout__container {
+  @apply w-full xl:max-w-screen-lg lg:max-w-screen-md md:max-w-screen-sm sm:max-w-md;
+}
+
+@tailwind utilities;

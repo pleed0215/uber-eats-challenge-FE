@@ -29,7 +29,7 @@ export const Pagination: React.FC<PaginationProps> = ({
           prev
         </button>
       )}
-      <span className="mr-3">{`${currentPage} / ${totalPage}`}</span>
+      <span className="mr-3">{`Page ${currentPage} of ${totalPage}`}</span>
       {currentPage !== totalPage && (
         <button onClick={onNext} className="hover:text-purple-300 transition">
           next
