@@ -9,7 +9,7 @@ export const Header = () => {
 
   return (
     <div className="w-full flex justify-center bg-gray-800 shadow-lg border-b-2 border-gray-500 min-w-max">
-      <div className="w-full xl:max-w-screen-lg lg:max-w-screen-md md:max-w-screen-sm sm:max-w-md px-4 pt-4 bg-gray-800 flex justify-between">
+      <div className="w-full xl:max-w-screen-lg lg:max-w-screen-md  px-4 pt-4 bg-gray-800 flex justify-between">
         <div className="flex font-bold text-white -mb-1 w-full max-w-2xl">
           <Link to="/" className="mr-6">
             <div
@@ -18,7 +18,7 @@ export const Header = () => {
             />
           </Link>
 
-          <ul className="flex items-center justify-around w-full">
+          <ul className="flex items-center justify-around w-full lg:visible md:invisible">
             <Link
               to="/"
               className="hover:scale-y-125 transform transition duration-300"
@@ -53,6 +53,18 @@ export const Header = () => {
                 }`}
               >
                 Search
+              </li>
+            </Link>
+            <Link
+              to="/my-page"
+              className="hover:scale-y-125 transform transition duration-300"
+            >
+              <li
+                className={`pb-2 ${
+                  pathname === "/my-page" && "border-b-4 border-purple-400 "
+                }`}
+              >
+                My Page
               </li>
             </Link>
           </ul>
