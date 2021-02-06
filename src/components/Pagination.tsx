@@ -23,7 +23,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       {currentPage !== 1 && (
         <button
           onClick={onPrev}
-          className="mr-3 hover:text-purple-300 transition"
+          className="mr-3 hover:text-purple-800 hover:bg-purple-200 transition druation-300 px-2 py border border-purple-200 rounded-md"
         >
           <FontAwesomeIcon icon={faArrowCircleLeft} className="mr-3" />
           prev
@@ -31,7 +31,10 @@ export const Pagination: React.FC<PaginationProps> = ({
       )}
       <span className="mr-3">{`Page ${currentPage} of ${totalPage}`}</span>
       {currentPage !== totalPage && (
-        <button onClick={onNext} className="hover:text-purple-300 transition">
+        <button
+          onClick={onNext}
+          className="hover:text-purple-800 hover:bg-purple-200 transition druation-300 px-2 py border border-purple-200 rounded-md"
+        >
           next
           <FontAwesomeIcon icon={faArrowCircleRight} className="ml-3" />
         </button>

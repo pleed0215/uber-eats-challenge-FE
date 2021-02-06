@@ -18,6 +18,12 @@ export interface GetPodcastsByCategoryInput {
   category: string;
 }
 
+export interface SearchPodcastInput {
+  title: string;
+  page?: number | null;
+  pageSize?: number | null;
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

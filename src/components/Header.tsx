@@ -22,7 +22,13 @@ export const Header = () => {
   };
 
   const onDropdownFocusOut = () => {
-    if (popup !== null) setPopup(false);
+    if (popup !== null) {
+      dropdownRef.current.classList.add("dropdown__hide");
+      setTimeout(() => {
+        setPopup(false);
+        dropdownRef.current.classList.remove("dropdown__hide");
+      }, 500);
+    }
   };
 
   return (
@@ -122,8 +128,10 @@ export const Header = () => {
             <div
               ref={dropdownRef}
               className={`origin-top-right opacity-0 absolute z-50 left-0 top-8 mt-2 w-56 rounded-md shadown-lg bg-white ring-1 ring-black ring-opacity-5 ${
-                popup === true && "dropdown__show"
-              } ${popup === false && "dropdown__hide"}`}
+                popup === true && "dropdown__show block"
+              } ${popup === false && "dropdown__hide hidden"} ${
+                popup === null && "hidden"
+              }`}
             >
               <div className="py-1" role="menu" aria-orientation="vertical">
                 <Link
