@@ -138,9 +138,9 @@ export const PodcastPage = () => {
   };
 
   return (
-    <div className="w-screen min-h-screen bg-gray-800 flex flex-col items-center relative">
+    <div className="w-full min-h-screen bg-gray-800 flex flex-col items-center relative">
       <HelmetOnlyTitle title="Podcast" />
-      <div className="w-full xl:max-w-screen-lg lg:max-w-screen-md md:max-w-screen-sm sm:max-w-md px-4 flex justify-between flex flex-col">
+      <div className="w-full xl:max-w-screen-lg lg:max-w-screen-md md:max-w-screen-sm flex px-4 justify-between flex-col">
         {(loadingPodcast || loadingEpispde || loadingReview) && (
           <LoaderWithLogo />
         )}

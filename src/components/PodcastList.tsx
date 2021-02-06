@@ -16,7 +16,7 @@ export const PodcastList: React.FC<IPodcastList> = ({
   return (
     <div className="mt-8 text-white w-full">
       <h4 className="text-2xl mb-8 font-bold">{title}</h4>
-      <div className="grid lg:grid-cols-4  md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 w-full">
+      <div className="grid lg:grid-cols-4  md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 w-full sm:px-0 px-2">
         {loading ? (
           <>
             <div className="animate-pulse bg-purple-100 h-52 rounded-lg bg-cover bg-center flex items-end"></div>

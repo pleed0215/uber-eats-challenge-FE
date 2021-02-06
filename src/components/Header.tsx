@@ -1,4 +1,12 @@
-import React from "react";
+import {
+  faCoffee,
+  faPodcast,
+  faSearch,
+  faSignOutAlt,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useMe } from "../hooks/useMe";
 
@@ -6,10 +14,20 @@ export const Header = () => {
   const { data, loading } = useMe();
   const categories = ["Book", "Fashion", "Comedy", "Medicine", "Music"];
   const { pathname, search } = useLocation();
+  const [popup, setPopup] = useState<boolean | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(document.createElement("div"));
+
+  const onPopupClick = () => {
+    setPopup(!popup);
+  };
+
+  const onDropdownFocusOut = () => {
+    if (popup !== null) setPopup(false);
+  };
 
   return (
     <div className="w-full flex justify-center bg-gray-800 shadow-lg border-b-2 border-gray-500 min-w-max">
-      <div className="w-full xl:max-w-screen-lg lg:max-w-screen-md  px-4 pt-4 bg-gray-800 flex justify-between">
+      <div className="layout__container xl:max-w-screen-lg lg:max-w-screen-md  md:flex sm:hidden hidden  px-4 pt-4 bg-gray-800 justify-between">
         <div className="flex font-bold text-white -mb-1 w-full max-w-2xl">
           <Link to="/" className="mr-6">
             <div
@@ -18,7 +36,7 @@ export const Header = () => {
             />
           </Link>
 
-          <ul className="flex items-center justify-around w-full lg:visible md:invisible">
+          <ul className="items-center justify-around w-full flex">
             <Link
               to="/"
               className="hover:scale-y-125 transform transition duration-300"
@@ -81,6 +99,77 @@ export const Header = () => {
           >
             <p>log out</p>
           </Link>
+        </div>
+      </div>
+      <div className="layout__container md:hidden sm:flex px-6 pt-4 bg-gray-800 ">
+        <div className="flex justify-between font-bold text-purple-200 -mb-1 w-full max-w-2xl ">
+          <Link to="/" className="mr-6">
+            <div
+              className="w-10 h-10 bg-cover bg-center animate-bounce"
+              style={{ backgroundImage: `url(/podcast.svg)` }}
+            />
+          </Link>
+          <div className="flex items-center font-bold text-purple-200 min-w-max relative">
+            <button onClick={onPopupClick} onBlur={onDropdownFocusOut}>
+              <div className="mr-2 hover:underline">
+                <FontAwesomeIcon icon={faUser} size="lg" className="mr-2" />
+                {data &&
+                  loading === false &&
+                  `${data.me.email}${data.me.name ? `(${data.me.name})` : ""}`}
+              </div>
+            </button>
+
+            <div
+              ref={dropdownRef}
+              className={`origin-top-right opacity-0 absolute z-50 left-0 top-8 mt-2 w-56 rounded-md shadown-lg bg-white ring-1 ring-black ring-opacity-5 ${
+                popup === true && "dropdown__show"
+              } ${popup === false && "dropdown__hide"}`}
+            >
+              <div className="py-1" role="menu" aria-orientation="vertical">
+                <Link
+                  to="/category"
+                  className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
+                  role="menuitem"
+                >
+                  <FontAwesomeIcon
+                    icon={faPodcast}
+                    size="lg"
+                    className="mr-3"
+                  />
+                  Category
+                </Link>
+                <Link
+                  to="/search"
+                  className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
+                  role="menuitem"
+                >
+                  <FontAwesomeIcon icon={faSearch} size="lg" className="mr-3" />
+                  Search
+                </Link>
+                <Link
+                  to="/my-page"
+                  className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
+                  role="menuitem"
+                >
+                  <FontAwesomeIcon icon={faCoffee} size="lg" className="mr-3" />
+                  My page
+                </Link>
+                <hr className="my-2" />
+                <Link
+                  to="/logout"
+                  className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
+                  role="menuitem"
+                >
+                  <FontAwesomeIcon
+                    icon={faSignOutAlt}
+                    size="lg"
+                    className="mr-3"
+                  />
+                  Log out
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

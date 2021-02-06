@@ -83,7 +83,7 @@ export const HomePage = () => {
   return (
     <div className="w-screen min-h-screen bg-gray-800 flex flex-col items-center relative">
       <HelmetOnlyTitle title="Welcome" />
-      <div className="w-full xl:max-w-screen-lg lg:max-w-screen-md md:max-w-screen-sm sm:max-w-md px-4 pt-4 flex justify-between flex flex-col">
+      <div className="w-full xl:max-w-screen-lg lg:max-w-screen-md md:max-w-screen-sm sm:max-w-md px-4 pt-4 justify-between flex flex-col">
         {loadingPopular && loadingEpisodes && loadingRecentlies && (
           <LoaderWithLogo />
         )}

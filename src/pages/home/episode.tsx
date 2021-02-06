@@ -87,13 +87,17 @@ export const EpisodePage = () => {
           <></>
         ) : (
           <>
+            <h4 className="text-white text-2xl font-bold my-4">
+              Now Listening...
+            </h4>
             <EpisodeItem episode={episodeData?.getEpisode?.episode} />
             <div className="h-4" />
             <hr />
             <div className="h-4" />
-            <span className="text-sm text-white mb-2">Podcast</span>
+            <span className="text-sm text-white mb-2">Podcast from...</span>
             <Link
               to={`/podcast/${episodeData?.getEpisode.episode?.podcast.id}`}
+              className="rounded-lg hover:bg-purple-700 p-4"
             >
               <div className="flex items-center h-16">
                 <div
