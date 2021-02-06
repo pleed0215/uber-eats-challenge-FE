@@ -109,7 +109,7 @@ export const CategoryPage = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center bg-gray-800">
-      <div className="layout__container">
+      <div className="layout__container px-2">
         {!categoryName ? (
           <div className="text-white py-8">
             <h4 className="text-2xl font-bol mb-4">Categories</h4>

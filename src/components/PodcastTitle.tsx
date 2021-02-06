@@ -48,29 +48,17 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
           />
           <div className="w-2/3 max-w-2/3 h-30 flex flex-col overflow-ellipsis">
             <h4 className="text-2xl font-semibold mb-2">{podcast?.title}</h4>
-            <p className="text-lg text-purple-200 font-bold mb-2">
-              {podcast?.host.email}
-              {"  "}
-              {podcast?.host?.name && `(${podcast?.host?.name})`}
-            </p>
-            <p className="overflow-ellipsis">{podcast?.description}</p>
-            <div className="flex items-center mt-4 text-purple-200">
-              <div className="rounded-2xl border border-purple-200 px-2 py-1">
-                <FontAwesomeIcon icon={faPlus} />
-                <span className="ml-2">Subscribe</span>
-              </div>
-              <FontAwesomeIcon icon={faGlobeAsia} size="lg" className="mx-5" />
-              <FontAwesomeIcon icon={faShareAlt} size="lg" className="mr-5" />
-              <div className="flex items-center border px-2 rounded-3xl">
-                <span className="mr-4">
-                  <strong>Host</strong>
-                </span>
+            <div className="flex items-center">
+              <p className="-mr-6 border-l border-b border-t px-2 rounded-l-3xl h-9 bg-purple-200 text-purple-800 flex items-center z-10">
+                <strong>Host</strong>
+              </p>
+              <div className="flex items-center border-b-2 border-t-2 border-r-2  px-2 rounded-r-3xl pl-8">
                 <Link
                   to={`/user/${podcast?.host.id}`}
                   className="flex items-center"
                 >
                   <div
-                    className=" w-8 h-8 bg-cover bg-center rounded-full bg-blue-200 mr-4"
+                    className=" w-8 h-8 bg-cover bg-center rounded-full bg-blue-200 mr-4 z-20"
                     style={{
                       backgroundImage: `url(${
                         podcast?.host.portrait
@@ -83,6 +71,15 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
                   <span className="mr-4">{podcast?.host.email}</span>
                 </Link>
               </div>
+            </div>
+            <p className="overflow-ellipsis">{podcast?.description}</p>
+            <div className="flex items-center mt-4 text-purple-200">
+              <div className="rounded-2xl border border-purple-200 px-2 py-1">
+                <FontAwesomeIcon icon={faPlus} />
+                <span className="ml-2">Subscribe</span>
+              </div>
+              <FontAwesomeIcon icon={faGlobeAsia} size="lg" className="mx-5" />
+              <FontAwesomeIcon icon={faShareAlt} size="lg" className="mr-5" />
             </div>
           </div>
         </div>
