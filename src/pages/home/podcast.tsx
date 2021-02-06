@@ -1,6 +1,5 @@
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -20,7 +19,7 @@ import { HelmetOnlyTitle } from "../../components/HelmetOnlyTitle";
 import { LoaderWithLogo } from "../../components/LoaderWithLogo";
 import { Pagination } from "../../components/Pagination";
 import { PodcastTitle } from "../../components/PodcastTitle";
-import { ReviewItem } from "../../components/ReviewItem";
+
 import { ReviewList } from "../../components/ReviewList";
 import {
   FRAGMENT_EPISODE,
@@ -148,6 +147,7 @@ export const PodcastPage = () => {
           podcast={podcast?.getPodcast.podcast}
           loading={loadingPodcast}
         />
+
         {!loadingPodcast && !loadingEpispde && !loadingReview && (
           <div className="h-10 border-b border-purple-200 mt-10 flex justify-center items-center text-white mb-4">
             <button

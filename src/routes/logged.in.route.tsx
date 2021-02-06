@@ -10,12 +10,19 @@ import { Footer } from "../components/footer";
 import { EpisodePage } from "../pages/home/episode";
 import { CategoryPage } from "../pages/home/category";
 import { SearchPage } from "../pages/home/search";
+import { UserPage } from "../pages/home/user";
 
 export const LoggedInRouter = () => {
   return (
     <Router>
       <Header />
       <Switch>
+        <Route path="/user/:id" exact>
+          <UserPage isSelf={false} />
+        </Route>
+        <Route path="/my-page" exact>
+          <UserPage isSelf={true} />
+        </Route>
         <Route path="/search" exact>
           <SearchPage />
         </Route>

@@ -8,6 +8,7 @@ export const GQL_QUERY_ME = gql`
       email
       role
       name
+      portrait
     }
   }
 `;

@@ -24,6 +24,11 @@ export interface SearchPodcastInput {
   pageSize?: number | null;
 }
 
+export interface SeeSubscriptionInput {
+  page?: number | null;
+  pageSize?: number | null;
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

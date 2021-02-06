@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { Link } from "react-router-dom";
 import { PartPodcast } from "../codegen/PartPodcast";
 
 interface PodcastTitleProps {
@@ -59,7 +60,29 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
                 <span className="ml-2">Subscribe</span>
               </div>
               <FontAwesomeIcon icon={faGlobeAsia} size="lg" className="mx-5" />
-              <FontAwesomeIcon icon={faShareAlt} size="lg" />
+              <FontAwesomeIcon icon={faShareAlt} size="lg" className="mr-5" />
+              <div className="flex items-center border px-2 rounded-3xl">
+                <span className="mr-4">
+                  <strong>Host</strong>
+                </span>
+                <Link
+                  to={`/user/${podcast?.host.id}`}
+                  className="flex items-center"
+                >
+                  <div
+                    className=" w-8 h-8 bg-cover bg-center rounded-full bg-blue-200 mr-4"
+                    style={{
+                      backgroundImage: `url(${
+                        podcast?.host.portrait
+                          ? podcast.host.portrait
+                          : "/podcast.svg"
+                      })`,
+                    }}
+                  />
+
+                  <span className="mr-4">{podcast?.host.email}</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

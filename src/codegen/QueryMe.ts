@@ -15,6 +15,7 @@ export interface QueryMe_me {
   email: string;
   role: UserRole;
   name: string | null;
+  portrait: string | null;
 }
 
 export interface QueryMe {
