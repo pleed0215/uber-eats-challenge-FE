@@ -1,5 +1,6 @@
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
 import { QueryMe } from "../codegen/QueryMe";
+import { FRAGMENT_PODCAST } from "../fragments";
 
 export const GQL_QUERY_ME = gql`
   query QueryMe {
@@ -9,8 +10,26 @@ export const GQL_QUERY_ME = gql`
       role
       name
       portrait
+      podcasts {
+        ...PartPodcast
+      }
+      subscriptions {
+        ...PartPodcast
+      }
+      reviews {
+        id
+        content
+        rating
+        podcast {
+          ...PartPodcast
+        }
+      }
+      sawEpisode {
+        id
+      }
     }
   }
+  ${FRAGMENT_PODCAST}
 `;
 
 export const useMe = () => {

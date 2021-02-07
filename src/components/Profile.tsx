@@ -12,7 +12,6 @@ export const Profile: React.FC<{ user?: User | null; loading: boolean }> = ({
   user,
   loading,
 }) => {
-  console.log(user?.portrait);
   return loading ? (
     <div className="max-w-sm w-full flex flex-col items-center">
       <div className="w-full h-6 bg-purple-200 animate-pulse mb-6 rounded-md" />
