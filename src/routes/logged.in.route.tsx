@@ -23,7 +23,7 @@ export const LoggedInRouter = () => {
         <Route path="/my-page" exact>
           <UserPage isSelf={true} />
         </Route>
-        <Route path="/search" exact>
+        <Route path="/find" exact>
           <SearchPage />
         </Route>
         <Route path="/category" exact>

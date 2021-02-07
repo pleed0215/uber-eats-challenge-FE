@@ -77,7 +77,7 @@ export const SearchPage = () => {
       <div className="layout__container flex flex-col  mt-4">
         <form
           method="GET"
-          action="/search"
+          action="/find"
           className="flex flex-col w-full items-center"
         >
           <div className="flex flex-col mt-6 w-full">

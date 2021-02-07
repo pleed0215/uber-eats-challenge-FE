@@ -68,12 +68,12 @@ export const Header = () => {
               </li>
             </Link>
             <Link
-              to="/search"
+              to="/find"
               className="hover:scale-y-125 transform transition duration-300"
             >
               <li
                 className={`pb-2 ${
-                  pathname === "/search" && "border-b-4 border-purple-400 "
+                  pathname === "/find" && "border-b-4 border-purple-400 "
                 }`}
               >
                 Search
