@@ -149,8 +149,8 @@ export const AuthPage: React.FC = () => {
   return (
     <div className="w-screen h-screen min-w-max flex justify-center font-mono bg-gradient-to-tr from-indigo-300 via-white to-purple-300">
       <HelmetOnlyTitle title={loginPage ? "Login" : "Create Account"} />
-      <div className="w-full max-w-lg  bg-purple-300 flex flex-col items-center p-8 relative mt-20 shadow-lg rounded-lg">
-        <div className=" bg-gray-50 absolute -top-16 flex items-center justify-center bg-white rounded-full w-32 h-32 bg-opacity-80">
+      <div className="w-full max-w-screen-sm  bg-purple-300 flex flex-col items-center p-8 relative mt-20 shadow-lg rounded-lg">
+        <div className=" bg-gray-50 absolute -top-16 flex items-center justify-center  rounded-full w-32 h-32 bg-opacity-80">
           <img
             className={`w-20 h-20 ${
               loading ? "animate-spin" : "animate__little_swing"
@@ -159,7 +159,7 @@ export const AuthPage: React.FC = () => {
             alt="Podcast Logo"
           />
         </div>
-        <h4 className="text-4xl font-bold mt-16 mb-6 text-center text-indigo-700 mb-8">
+        <h4 className="text-4xl font-bold mt-16 text-center text-indigo-700 mb-8">
           {loginPage ? "Welcome back" : "Creating account"}
         </h4>
         <form

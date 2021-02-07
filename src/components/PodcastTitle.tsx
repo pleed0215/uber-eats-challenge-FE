@@ -22,7 +22,7 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
     <div className="w-full text-white">
       {loading ? (
         <div className="w-full px-4 py-4 flex">
-          <div className="w-32 h-32 bg-purple-200 animate-bounce rounded-lg mr-3" />
+          <div className="w-32 h-32 bg-purple-200 rounded-lg mr-3" />
           <div className="w-2/3 max-w-2/3 h-30 flex flex-col overflow-ellipsis">
             <div className="w-full h-6 bg-purple-200 animate-pulse mb-2" />
             <div className="w-full h-6 bg-purple-200 animate-pulse mb-2" />
