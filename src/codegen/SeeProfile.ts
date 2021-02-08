@@ -25,22 +25,8 @@ export interface SeeProfile_seeProfile_user_podcasts {
   description: string | null;
   thumbnail: string | null;
   host: SeeProfile_seeProfile_user_podcasts_host;
-}
-
-export interface SeeProfile_seeProfile_user_reviews_reviewer {
-  __typename: "User";
-  id: number;
-  name: string | null;
-  email: string;
-  portrait: string | null;
-}
-
-export interface SeeProfile_seeProfile_user_reviews {
-  __typename: "Review";
-  id: number;
-  content: string;
-  rating: number;
-  reviewer: SeeProfile_seeProfile_user_reviews_reviewer;
+  isOnSubscribe: boolean | null;
+  numSubscriber: number | null;
 }
 
 export interface SeeProfile_seeProfile_user {
@@ -51,7 +37,6 @@ export interface SeeProfile_seeProfile_user {
   role: UserRole;
   portrait: string | null;
   podcasts: SeeProfile_seeProfile_user_podcasts[] | null;
-  reviews: SeeProfile_seeProfile_user_reviews[] | null;
 }
 
 export interface SeeProfile_seeProfile {

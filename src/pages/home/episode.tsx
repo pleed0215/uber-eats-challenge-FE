@@ -133,6 +133,7 @@ export const EpisodePage = () => {
                 onPrev={onPrev}
                 totalPage={episodes?.getEpisodes.totalPage}
                 currentPage={page}
+                loading={loadingEpisodes}
               />
             </div>
           </>

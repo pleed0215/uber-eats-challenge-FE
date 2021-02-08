@@ -10,6 +10,7 @@ interface PaginationProps {
   onNext: any;
   currentPage?: number;
   totalPage?: number | null;
+  loading?: boolean;
 }
 
 export const Pagination: React.FC<PaginationProps> = ({
@@ -17,8 +18,11 @@ export const Pagination: React.FC<PaginationProps> = ({
   onNext,
   currentPage,
   totalPage,
+  loading = false,
 }) => {
-  return (
+  return loading ? (
+    <div className="py-4 px-20 bg-purple-200 rounded-md animate-pulse" />
+  ) : (
     <div className="flex items-center text-white text-xl py-2">
       {currentPage !== 1 && (
         <button

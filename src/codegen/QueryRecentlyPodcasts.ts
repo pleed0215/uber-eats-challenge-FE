@@ -23,6 +23,8 @@ export interface QueryRecentlyPodcasts_getRecentlyPodcast_podcasts {
   description: string | null;
   thumbnail: string | null;
   host: QueryRecentlyPodcasts_getRecentlyPodcast_podcasts_host;
+  isOnSubscribe: boolean | null;
+  numSubscriber: number | null;
 }
 
 export interface QueryRecentlyPodcasts_getRecentlyPodcast {

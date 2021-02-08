@@ -25,6 +25,8 @@ export interface SearchPodcast_searchPodcast_results {
   description: string | null;
   thumbnail: string | null;
   host: SearchPodcast_searchPodcast_results_host;
+  isOnSubscribe: boolean | null;
+  numSubscriber: number | null;
 }
 
 export interface SearchPodcast_searchPodcast {

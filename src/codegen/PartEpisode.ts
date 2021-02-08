@@ -33,5 +33,7 @@ export interface PartEpisode {
   description: string | null;
   playLength: number | null;
   createdAt: any;
+  haveSeen: boolean;
+  watchCounter: number;
   podcast: PartEpisode_podcast;
 }

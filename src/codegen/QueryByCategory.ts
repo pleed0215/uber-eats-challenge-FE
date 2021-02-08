@@ -25,6 +25,8 @@ export interface QueryByCategory_getPodcastByCategory_podcasts {
   description: string | null;
   thumbnail: string | null;
   host: QueryByCategory_getPodcastByCategory_podcasts_host;
+  isOnSubscribe: boolean | null;
+  numSubscriber: number | null;
 }
 
 export interface QueryByCategory_getPodcastByCategory {

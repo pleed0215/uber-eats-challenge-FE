@@ -33,6 +33,8 @@ export interface QueryGetEpisodes_getEpisodes_episodes {
   description: string | null;
   playLength: number | null;
   createdAt: any;
+  haveSeen: boolean;
+  watchCounter: number;
   podcast: QueryGetEpisodes_getEpisodes_episodes_podcast;
 }
 

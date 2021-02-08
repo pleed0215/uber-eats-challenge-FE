@@ -23,4 +23,6 @@ export interface PartPodcast {
   description: string | null;
   thumbnail: string | null;
   host: PartPodcast_host;
+  isOnSubscribe: boolean | null;
+  numSubscriber: number | null;
 }

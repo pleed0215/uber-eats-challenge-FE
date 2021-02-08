@@ -25,6 +25,8 @@ export interface SeeSubScription_seeSubscribtions_subscriptions {
   description: string | null;
   thumbnail: string | null;
   host: SeeSubScription_seeSubscribtions_subscriptions_host;
+  isOnSubscribe: boolean | null;
+  numSubscriber: number | null;
 }
 
 export interface SeeSubScription_seeSubscribtions {

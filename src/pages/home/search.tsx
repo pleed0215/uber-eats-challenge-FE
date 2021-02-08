@@ -107,15 +107,20 @@ export const SearchPage = () => {
           <>
             <PodcastList
               podcasts={podcasts?.searchPodcast.results}
-              title={`Search by: ${queryParam} (${podcasts?.searchPodcast.totalCount} found)`}
+              title={`Search by: ${queryParam} (${
+                loading
+                  ? "Loading..."
+                  : `${podcasts?.searchPodcast.totalCount} found`
+              })`}
               loading={loading}
             />
-            <div className="w-full flex justify-center">
+            <div className="w-full flex justify-center mt-3">
               <Pagination
                 onNext={onNext}
                 onPrev={onPrev}
                 totalPage={podcasts?.searchPodcast.totalPage}
                 currentPage={page}
+                loading={loading}
               />
             </div>
           </>

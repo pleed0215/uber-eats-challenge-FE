@@ -56,7 +56,6 @@ const GQL_SEE_PROFILE = gql`
     }
   }
   ${FRAGMENT_PODCAST}
-  ${FRAGMENT_REVIEW}
 `;
 
 export const UserPage: React.FC<{ isSelf: boolean }> = ({ isSelf = true }) => {
@@ -106,7 +105,7 @@ export const UserPage: React.FC<{ isSelf: boolean }> = ({ isSelf = true }) => {
 
   return (
     <div className="w-full min-h-screen flex justify-center bg-gray-800">
-      <div className="layout__container flex flex-col mt-20  items-center px-2">
+      <div className="layout__container flex flex-col mt-20  items-center px-2 pb-4">
         {(seeProfileLoading || me.loading) && <LoaderWithLogo />}
         {isSelf && <Profile user={me.data?.me} loading={me.loading} />}
         {!isSelf && (
@@ -155,12 +154,13 @@ export const UserPage: React.FC<{ isSelf: boolean }> = ({ isSelf = true }) => {
                   ... Has no subscriptions ....
                 </h4>
               )}
-            <div className="w-full flex justify-center">
+            <div className="w-full flex justify-center mt-3">
               <Pagination
                 onNext={onNext}
                 onPrev={onPrev}
                 totalPage={seeSubscriptionData?.seeSubscribtions.totalPage}
                 currentPage={page}
+                loading={seeSubscriptionLoading}
               />
             </div>
           </div>

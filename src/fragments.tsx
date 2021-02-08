@@ -13,6 +13,8 @@ export const FRAGMENT_PODCAST = gql`
       name
       portrait
     }
+    isOnSubscribe
+    numSubscriber
   }
 `;
 
@@ -59,6 +61,8 @@ export const FRAGMENT_EPISODE = gql`
     description
     playLength
     createdAt
+    haveSeen
+    watchCounter
     podcast {
       id
       title
