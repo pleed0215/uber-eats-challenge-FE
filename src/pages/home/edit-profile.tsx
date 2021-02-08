@@ -6,7 +6,7 @@ import {
   MutationEditProfile,
   MutationEditProfileVariables,
 } from "../../codegen/MutationEditProfile";
-import { useMe } from "../../hooks/useMe";
+import { GQL_QUERY_ME, useMe } from "../../hooks/useMe";
 import { EMAIL_REGEX } from "../../utils";
 import { UserRole } from "../auth/auth";
 
@@ -36,6 +36,7 @@ export const EditProfilePage = () => {
     register,
     formState,
     setValue,
+    setError,
   } = useForm<IForm>({
     mode: "onChange",
   });
@@ -49,12 +50,22 @@ export const EditProfilePage = () => {
     onCompleted: (data: MutationEditProfile) => {
       history.goBack();
     },
+    refetchQueries: [
+      {
+        query: GQL_QUERY_ME,
+      },
+    ],
   });
 
   const onSubmit = () => {
     if (formState.isValid) {
       const editProfileInput = getValues();
-      editProfile({ variables: { input: editProfileInput } });
+      if (editProfileInput.password === editProfileInput.password2) {
+        const { password2, ...input } = editProfileInput;
+        editProfile({ variables: { input } });
+      } else {
+        setError("password2", { message: "Please confirm password" });
+      }
     }
   };
 
@@ -63,7 +74,6 @@ export const EditProfilePage = () => {
     setValue("email", me?.me.email);
     setValue("role", me?.me.role);
     setValue("name", me?.me.name);
-    console.log("??");
   }, [meLoading]);
 
   return (
@@ -171,6 +181,7 @@ export const EditProfilePage = () => {
             <option>Host</option>
             <option>Listener</option>
           </select>
+          <button className="form__button">Update</button>
         </form>
       </div>
     </div>

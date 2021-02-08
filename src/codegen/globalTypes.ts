@@ -14,6 +14,7 @@ export enum UserRole {
 
 export interface EditProfileInput {
   email?: string | null;
+  name?: string | null;
   password?: string | null;
   role?: UserRole | null;
   portrait?: string | null;
