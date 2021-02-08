@@ -11,6 +11,7 @@ import { EpisodePage } from "../pages/home/episode";
 import { CategoryPage } from "../pages/home/category";
 import { SearchPage } from "../pages/home/search";
 import { UserPage } from "../pages/home/user";
+import { EditProfilePage } from "../pages/home/edit-profile";
 
 export const LoggedInRouter = () => {
   return (
@@ -19,6 +20,9 @@ export const LoggedInRouter = () => {
       <Switch>
         <Route path="/user/:id" exact>
           <UserPage isSelf={false} />
+        </Route>
+        <Route path="/my-page/edit" exact>
+          <EditProfilePage />
         </Route>
         <Route path="/my-page" exact>
           <UserPage isSelf={true} />

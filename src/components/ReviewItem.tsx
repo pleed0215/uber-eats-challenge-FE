@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 import { PartReview } from "../codegen/PartReview";
+import { getRandomSoftBgColor } from "../utils";
 
 interface ReveiwItemProps {
   review?: PartReview | null;
@@ -14,9 +15,13 @@ export const ReviewItem: React.FC<ReveiwItemProps> = ({ review }) => {
       <Link to={`/user/${review?.reviewer.id}`}>
         <div className="w-full flex items-center my-3">
           <div
-            className="w-12 h-12 rounded-full bg-cover bg-center mr-3"
+            className={`w-12 h-12 rounded-full bg-cover bg-center mr-3 ${getRandomSoftBgColor()}`}
             style={{
-              backgroundImage: `url(${review?.reviewer.portrait})`,
+              backgroundImage: `url(${
+                review?.reviewer.portrait
+                  ? review?.reviewer.portrait
+                  : "/podcast.svg"
+              })`,
             }}
           />
           <div className="max-w-sm flex flex-col justify-center">

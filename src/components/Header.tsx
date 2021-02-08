@@ -11,7 +11,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useMe } from "../hooks/useMe";
 
 export const Header = () => {
-  const { data, loading } = useMe();
+  const { data, loading, error } = useMe();
   const categories = ["Book", "Fashion", "Comedy", "Medicine", "Music"];
   const { pathname, search } = useLocation();
   const [popup, setPopup] = useState<boolean | null>(null);

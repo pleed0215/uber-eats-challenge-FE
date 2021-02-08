@@ -53,3 +53,19 @@ export const secondsToTime = (seconds: number) => {
   }
   return Math.floor(seconds) + " seconds";
 };
+
+const softBgColors = [
+  "bg-yellow-200",
+  "bg-red-500",
+  "bg-green-100",
+  "bg-blue-200",
+  "bg-indigo-100",
+  "bg-purple-50",
+  "bg-pink-300",
+];
+
+export function getRandomSoftBgColor() {
+  const length = softBgColors.length;
+  const randomIndex = Math.floor(Math.random() * length);
+  return softBgColors[randomIndex];
+}

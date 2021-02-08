@@ -10,26 +10,8 @@ export const GQL_QUERY_ME = gql`
       role
       name
       portrait
-      podcasts {
-        ...PartPodcast
-      }
-      subscriptions {
-        ...PartPodcast
-      }
-      reviews {
-        id
-        content
-        rating
-        podcast {
-          ...PartPodcast
-        }
-      }
-      sawEpisode {
-        id
-      }
     }
   }
-  ${FRAGMENT_PODCAST}
 `;
 
 export const useMe = () => {

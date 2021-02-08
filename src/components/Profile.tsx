@@ -1,5 +1,6 @@
 import React from "react";
 import { UserRole } from "../pages/auth/auth";
+import { getRandomSoftBgColor } from "../utils";
 
 interface User {
   name?: string | null;
@@ -28,7 +29,7 @@ export const Profile: React.FC<{ user?: User | null; loading: boolean }> = ({
         {user?.email}'s Page
       </h3>
       <div
-        className=" w-28 h-28 bg-cover bg-center rounded-full bg-blue-200 mb-6"
+        className={`w-28 h-28 bg-cover bg-center rounded-full bg-blue-200 mb-6 ${getRandomSoftBgColor()}`}
         style={{
           backgroundImage: `url(${
             user?.portrait ? user.portrait : "/podcast.svg"
