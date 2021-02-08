@@ -16,11 +16,11 @@
 
 ## Listener:
 
-- [ ] See Podcast Categories
-- [ ] Search Podcasts
-- [ ] See Podcast + Episodes
+- [x] See Podcast Categories
+- [x] Search Podcasts
+- [x] See Podcast + Episodes
 - [ ] Review Podcast
 - [ ] Subscribe to a Podcast
-- [ ] See Subscriptions
+- [x] See Subscriptions
 - [ ] See Feed (Episodes of Podcasts the user is subscribed to combined)
 - [ ] Bonus points if you make a audio player using React

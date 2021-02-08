@@ -12,6 +12,13 @@ export enum UserRole {
   Listener = "Listener",
 }
 
+export interface EditProfileInput {
+  email?: string | null;
+  password?: string | null;
+  role?: UserRole | null;
+  portrait?: string | null;
+}
+
 export interface GetPodcastsByCategoryInput {
   page?: number | null;
   pageSize?: number | null;
