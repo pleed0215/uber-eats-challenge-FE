@@ -22,7 +22,7 @@
 }
 
 .form__button {
-  @apply text-lg font-bold text-white bg-purple-600 hover:bg-purple-800 transition duration-300 mt-4 py-2 px-4 rounded-lg;
+  @apply text-lg font-bold text-white bg-purple-600 hover:bg-purple-800 transition duration-300 mt-4 py-2 px-4 rounded-lg focus:outline-none;
 }
 
 @keyframes dropdownShow {

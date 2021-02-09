@@ -1,11 +1,12 @@
 import { gql, useMutation } from "@apollo/client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import {
   MutationEditProfile,
   MutationEditProfileVariables,
 } from "../../codegen/MutationEditProfile";
+import { ButtonInactivable } from "../../components/ButtonInactivable";
 import { GQL_QUERY_ME, useMe } from "../../hooks/useMe";
 import { EMAIL_REGEX } from "../../utils";
 import { UserRole } from "../auth/auth";
@@ -41,6 +42,7 @@ export const EditProfilePage = () => {
     mode: "onChange",
   });
   const history = useHistory();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { data: me, loading: meLoading } = useMe();
 
   const [editProfile, { data, loading }] = useMutation<
@@ -48,6 +50,7 @@ export const EditProfilePage = () => {
     MutationEditProfileVariables
   >(GQL_EDIT_PROFILE, {
     onCompleted: (data: MutationEditProfile) => {
+      setIsSubmitting(false);
       history.goBack();
     },
     refetchQueries: [
@@ -60,11 +63,22 @@ export const EditProfilePage = () => {
   const onSubmit = () => {
     if (formState.isValid) {
       const editProfileInput = getValues();
-      if (editProfileInput.password === editProfileInput.password2) {
-        const { password2, ...input } = editProfileInput;
-        editProfile({ variables: { input } });
+      if (
+        editProfileInput.password !== "" ||
+        editProfileInput.password2 !== ""
+      ) {
+        if (editProfileInput.password === editProfileInput.password2) {
+          const { password2, ...input } = editProfileInput;
+          setIsSubmitting(true);
+          editProfile({ variables: { input } });
+        } else {
+          setError("password2", { message: "Please confirm password" });
+        }
       } else {
-        setError("password2", { message: "Please confirm password" });
+        const { password, password2, ...input } = editProfileInput;
+
+        setIsSubmitting(true);
+        editProfile({ variables: { input } });
       }
     }
   };
@@ -109,12 +123,12 @@ export const EditProfilePage = () => {
             <input
               ref={register({
                 minLength: {
-                  value: 4,
-                  message: "Name must be longer than 6.",
+                  value: 3,
+                  message: "Name must be longer than 3.",
                 },
                 maxLength: {
                   value: 20,
-                  message: "Name must be shorter than 16.",
+                  message: "Name must be shorter than 20.",
                 },
               })}
               placeholder="Name"
@@ -181,7 +195,9 @@ export const EditProfilePage = () => {
             <option>Host</option>
             <option>Listener</option>
           </select>
-          <button className="form__button">Update</button>
+          <ButtonInactivable isActivate={!isSubmitting} loading={isSubmitting}>
+            Update
+          </ButtonInactivable>
         </form>
       </div>
     </div>

@@ -69,3 +69,10 @@ export function getRandomSoftBgColor() {
   const randomIndex = Math.floor(Math.random() * length);
   return softBgColors[randomIndex];
 }
+
+export function useBackgroundImageOrDefaultUrl(imageUrl?: string | null) {
+  const object = {
+    backgroundImage: `url(${imageUrl ? imageUrl : "/podcast.svg"})`,
+  };
+  return object;
+}

@@ -85,8 +85,6 @@ export const UserPage: React.FC<{ isSelf: boolean }> = ({ isSelf = true }) => {
     }
   }, [page]);
 
-  console.log(seeSubscriptionData);
-
   const onPrev = () => {
     if (page > 1) {
       setPage(page - 1);

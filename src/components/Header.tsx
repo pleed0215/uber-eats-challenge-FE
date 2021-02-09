@@ -9,10 +9,65 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useMe } from "../hooks/useMe";
+import { getRandomSoftBgColor, useBackgroundImageOrDefaultUrl } from "../utils";
+
+interface PopupMenuProps {
+  dropdownRef: React.MutableRefObject<HTMLDivElement>;
+  popup: boolean | null;
+}
+
+const PopupMenu: React.FC<PopupMenuProps> = ({ dropdownRef, popup }) => {
+  return (
+    <div
+      ref={dropdownRef}
+      className={`origin-top-right opacity-0 absolute z-50 left-0 top-8 mt-2 w-56 rounded-md shadown-lg bg-white ring-1 ring-black ring-opacity-5 ${
+        popup === true && "dropdown__show block"
+      } ${popup === false && "dropdown__hide hidden"} ${
+        popup === null && "hidden"
+      }`}
+    >
+      <div className="py-1" role="menu" aria-orientation="vertical">
+        <Link
+          to="/category"
+          className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
+          role="menuitem"
+        >
+          <FontAwesomeIcon icon={faPodcast} size="lg" className="mr-3" />
+          Category
+        </Link>
+        <Link
+          to="/find"
+          className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
+          role="menuitem"
+        >
+          <FontAwesomeIcon icon={faSearch} size="lg" className="mr-3" />
+          Search
+        </Link>
+        <Link
+          to="/my-page"
+          className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
+          role="menuitem"
+        >
+          <FontAwesomeIcon icon={faCoffee} size="lg" className="mr-3" />
+          My page
+        </Link>
+        <hr className="my-2" />
+        <Link
+          to="/logout"
+          className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
+          role="menuitem"
+        >
+          <FontAwesomeIcon icon={faSignOutAlt} size="lg" className="mr-3" />
+          Log out
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 export const Header = () => {
   const { data, loading, error } = useMe();
-  const categories = ["Book", "Fashion", "Comedy", "Medicine", "Music"];
+
   const { pathname, search } = useLocation();
   const [popup, setPopup] = useState<boolean | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(document.createElement("div"));
@@ -93,18 +148,22 @@ export const Header = () => {
             </Link>
           </ul>
         </div>
-        <div className="flex items-center font-bold text-white min-w-max">
-          <div className="mr-2 hover:underline">
-            {data &&
-              loading === false &&
-              `${data.me.email}${data.me.name ? `(${data.me.name})` : ""}`}
-          </div>
-          <Link
-            to="/logout"
-            className="transform hover:scale-110 transition duration-300 uppercase"
-          >
-            <p>log out</p>
-          </Link>
+        <div className="flex items-center font-bold text-white min-w-max text-sm relative">
+          <button onClick={onPopupClick} onBlur={onDropdownFocusOut}>
+            <div className="mr-2 flex items-center">
+              {data && loading === false && (
+                <div
+                  className={`mr-1 w-7 h-7 bg-cover bg-center rounded-full ${getRandomSoftBgColor()}`}
+                  style={useBackgroundImageOrDefaultUrl(data?.me.portrait)}
+                />
+              )}
+              {data && loading === false && <span>{data.me.email}</span>}
+              {data && loading === false && data?.me.name && (
+                <span className="text-xs">({data?.me.name})</span>
+              )}
+            </div>
+          </button>
+          <PopupMenu dropdownRef={dropdownRef} popup={popup} />
         </div>
       </div>
       <div className="layout__container md:hidden sm:flex px-6 pt-4 bg-gray-800 ">
@@ -117,66 +176,18 @@ export const Header = () => {
           </Link>
           <div className="flex items-center font-bold text-purple-200 min-w-max relative">
             <button onClick={onPopupClick} onBlur={onDropdownFocusOut}>
-              <div className="mr-2 hover:underline">
-                <FontAwesomeIcon icon={faUser} size="lg" className="mr-2" />
+              <div className="mr-2 hover:underline flex items-center text-sm">
+                <div
+                  className={`mr-1 w-7 h-7 bg-cover bg-center rounded-full ${getRandomSoftBgColor()}`}
+                  style={useBackgroundImageOrDefaultUrl(data?.me.portrait)}
+                />
                 {data &&
                   loading === false &&
                   `${data.me.email}${data.me.name ? `(${data.me.name})` : ""}`}
               </div>
             </button>
 
-            <div
-              ref={dropdownRef}
-              className={`origin-top-right opacity-0 absolute z-50 left-0 top-8 mt-2 w-56 rounded-md shadown-lg bg-white ring-1 ring-black ring-opacity-5 ${
-                popup === true && "dropdown__show block"
-              } ${popup === false && "dropdown__hide hidden"} ${
-                popup === null && "hidden"
-              }`}
-            >
-              <div className="py-1" role="menu" aria-orientation="vertical">
-                <Link
-                  to="/category"
-                  className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
-                  role="menuitem"
-                >
-                  <FontAwesomeIcon
-                    icon={faPodcast}
-                    size="lg"
-                    className="mr-3"
-                  />
-                  Category
-                </Link>
-                <Link
-                  to="/search"
-                  className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
-                  role="menuitem"
-                >
-                  <FontAwesomeIcon icon={faSearch} size="lg" className="mr-3" />
-                  Search
-                </Link>
-                <Link
-                  to="/my-page"
-                  className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
-                  role="menuitem"
-                >
-                  <FontAwesomeIcon icon={faCoffee} size="lg" className="mr-3" />
-                  My page
-                </Link>
-                <hr className="my-2" />
-                <Link
-                  to="/logout"
-                  className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
-                  role="menuitem"
-                >
-                  <FontAwesomeIcon
-                    icon={faSignOutAlt}
-                    size="lg"
-                    className="mr-3"
-                  />
-                  Log out
-                </Link>
-              </div>
-            </div>
+            <PopupMenu dropdownRef={dropdownRef} popup={popup} />
           </div>
         </div>
       </div>

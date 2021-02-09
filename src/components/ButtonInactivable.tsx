@@ -14,7 +14,7 @@ export const ButtonInactivable: React.FC<IButtonInactivableType> = ({
 
   return (
     <button
-      className={`py-3 px-5 font-bold text-white mt-3 text-lg focus:outline-none hover:bg-indigo-800 transition duration-500 rounded-lg flex justify-center ${
+      className={`form__button flex justify-center ${
         !isActivate ? "pointer-events-none bg-gray-400" : "bg-indigo-700"
       }`}
       {...rest}

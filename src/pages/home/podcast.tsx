@@ -185,6 +185,7 @@ export const PodcastPage = () => {
                 onPrev={onPrev}
                 totalPage={episodes?.getEpisodes.totalPage}
                 currentPage={page}
+                loading={loadingEpispde}
               />
             </div>
           </>
@@ -202,6 +203,7 @@ export const PodcastPage = () => {
                 onPrev={onPrev}
                 totalPage={reviews?.seePodcastReviews.totalPage}
                 currentPage={page}
+                loading={loadingReview}
               />
             </div>
           </>

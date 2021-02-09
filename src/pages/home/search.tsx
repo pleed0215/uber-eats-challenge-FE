@@ -74,7 +74,7 @@ export const SearchPage = () => {
     <div className="w-full min-h-screen flex justify-center bg-gray-800">
       <HelmetOnlyTitle title="Search" />
       {loading && <LoaderWithLogo />}
-      <div className="layout__container flex flex-col  mt-4">
+      <div className="layout__container flex flex-col  mt-4 px-2">
         <form
           method="GET"
           action="/find"
