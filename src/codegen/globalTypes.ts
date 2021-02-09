@@ -26,6 +26,12 @@ export interface GetPodcastsByCategoryInput {
   category: string;
 }
 
+export interface ReviewPodcastInput {
+  content: string;
+  rating: number;
+  podcastId: number;
+}
+
 export interface SearchPodcastInput {
   title: string;
   page?: number | null;
@@ -35,6 +41,10 @@ export interface SearchPodcastInput {
 export interface SeeSubscriptionInput {
   page?: number | null;
   pageSize?: number | null;
+}
+
+export interface ToggleSubscriptionInput {
+  podcastId: number;
 }
 
 //==============================================================

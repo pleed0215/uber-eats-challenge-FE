@@ -27,6 +27,7 @@ export interface SeeSubScription_seeSubscribtions_subscriptions {
   host: SeeSubScription_seeSubscribtions_subscriptions_host;
   isOnSubscribe: boolean | null;
   numSubscriber: number | null;
+  reviewedPodcast: boolean;
 }
 
 export interface SeeSubScription_seeSubscribtions {

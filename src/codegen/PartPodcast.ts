@@ -25,4 +25,5 @@ export interface PartPodcast {
   host: PartPodcast_host;
   isOnSubscribe: boolean | null;
   numSubscriber: number | null;
+  reviewedPodcast: boolean;
 }

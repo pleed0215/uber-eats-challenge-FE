@@ -25,6 +25,7 @@ export interface QueryGetPodcasts_getAllPodcasts_podcasts {
   host: QueryGetPodcasts_getAllPodcasts_podcasts_host;
   isOnSubscribe: boolean | null;
   numSubscriber: number | null;
+  reviewedPodcast: boolean;
 }
 
 export interface QueryGetPodcasts_getAllPodcasts {

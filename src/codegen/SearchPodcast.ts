@@ -27,6 +27,7 @@ export interface SearchPodcast_searchPodcast_results {
   host: SearchPodcast_searchPodcast_results_host;
   isOnSubscribe: boolean | null;
   numSubscriber: number | null;
+  reviewedPodcast: boolean;
 }
 
 export interface SearchPodcast_searchPodcast {

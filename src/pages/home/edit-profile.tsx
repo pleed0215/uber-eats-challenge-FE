@@ -82,9 +82,10 @@ export const EditProfilePage = () => {
     if (formState.isValid) {
       const editProfileInput = getValues();
       if (
-        editProfileInput.password !== "" ||
+        editProfileInput.password !== "" &&
         editProfileInput.password2 !== ""
       ) {
+        console.log("hello");
         if (editProfileInput.password === editProfileInput.password2) {
           const { password2, portrait: _, ...input } = editProfileInput;
           setIsSubmitting(true);
@@ -93,9 +94,9 @@ export const EditProfilePage = () => {
           setError("password2", { message: "Please confirm password" });
         }
       } else {
-        const { password, password2, ...input } = editProfileInput;
-
+        const { password, password2, portrait: _, ...input } = editProfileInput;
         setIsSubmitting(true);
+
         editProfile({ variables: { input: { ...input, portrait } } });
       }
     }

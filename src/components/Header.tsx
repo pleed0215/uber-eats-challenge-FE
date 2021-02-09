@@ -157,10 +157,14 @@ export const Header = () => {
                   style={useBackgroundImageOrDefaultUrl(data?.me.portrait)}
                 />
               )}
-              {data && loading === false && <span>{data.me.email}</span>}
-              {data && loading === false && data?.me.name && (
-                <span className="text-xs">({data?.me.name})</span>
-              )}
+              <div className="flex flex-col">
+                {data && loading === false && <span>{data.me.email}</span>}
+                {data && loading === false && data?.me.name && (
+                  <span className="text-xs -mt-1 italic">
+                    ({data?.me.name})
+                  </span>
+                )}
+              </div>
             </div>
           </button>
           <PopupMenu dropdownRef={dropdownRef} popup={popup} />

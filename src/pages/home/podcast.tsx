@@ -19,6 +19,7 @@ import { HelmetOnlyTitle } from "../../components/HelmetOnlyTitle";
 import { LoaderWithLogo } from "../../components/LoaderWithLogo";
 import { Pagination } from "../../components/Pagination";
 import { PodcastTitle } from "../../components/PodcastTitle";
+import { ReviewForm } from "../../components/ReviewForm";
 
 import { ReviewList } from "../../components/ReviewList";
 import {
@@ -27,7 +28,7 @@ import {
   FRAGMENT_REVIEW,
 } from "../../fragments";
 
-const GQL_GET_PODCAST = gql`
+export const GQL_GET_PODCAST = gql`
   query QueryGetPodcast($id: Int!) {
     getPodcast(input: { id: $id }) {
       ok
@@ -147,7 +148,11 @@ export const PodcastPage = () => {
           podcast={podcast?.getPodcast.podcast}
           loading={loadingPodcast}
         />
-
+        <ReviewForm
+          podcastId={+id}
+          loading={loadingPodcast}
+          reviewed={podcast?.getPodcast.podcast?.reviewedPodcast}
+        />
         {!loadingPodcast && !loadingEpispde && !loadingReview && (
           <div className="h-10 border-b border-purple-200 mt-10 flex justify-center items-center text-white mb-4">
             <button

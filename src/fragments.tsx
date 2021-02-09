@@ -15,6 +15,7 @@ export const FRAGMENT_PODCAST = gql`
     }
     isOnSubscribe
     numSubscriber
+    reviewedPodcast
   }
 `;
 

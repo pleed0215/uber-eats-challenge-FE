@@ -25,6 +25,7 @@ export interface QueryRecentlyPodcasts_getRecentlyPodcast_podcasts {
   host: QueryRecentlyPodcasts_getRecentlyPodcast_podcasts_host;
   isOnSubscribe: boolean | null;
   numSubscriber: number | null;
+  reviewedPodcast: boolean;
 }
 
 export interface QueryRecentlyPodcasts_getRecentlyPodcast {

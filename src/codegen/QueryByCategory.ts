@@ -27,6 +27,7 @@ export interface QueryByCategory_getPodcastByCategory_podcasts {
   host: QueryByCategory_getPodcastByCategory_podcasts_host;
   isOnSubscribe: boolean | null;
   numSubscriber: number | null;
+  reviewedPodcast: boolean;
 }
 
 export interface QueryByCategory_getPodcastByCategory {

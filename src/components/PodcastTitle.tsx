@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 import { PartPodcast } from "../codegen/PartPodcast";
+import { SubscribeButton } from "./Subscribe";
 
 interface PodcastTitleProps {
   podcast?: PartPodcast | null;
@@ -74,10 +75,7 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
             </div>
             <p className="overflow-ellipsis">{podcast?.description}</p>
             <div className="flex items-center mt-4 text-purple-200">
-              <div className="rounded-2xl border border-purple-200 px-2 py-1">
-                <FontAwesomeIcon icon={faPlus} />
-                <span className="ml-2">Subscribe</span>
-              </div>
+              <SubscribeButton podcast={podcast} loading={loading} />
               <FontAwesomeIcon icon={faGlobeAsia} size="lg" className="mx-5" />
               <FontAwesomeIcon icon={faShareAlt} size="lg" className="mr-5" />
             </div>

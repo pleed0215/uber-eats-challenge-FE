@@ -27,6 +27,7 @@ export interface SeeProfile_seeProfile_user_podcasts {
   host: SeeProfile_seeProfile_user_podcasts_host;
   isOnSubscribe: boolean | null;
   numSubscriber: number | null;
+  reviewedPodcast: boolean;
 }
 
 export interface SeeProfile_seeProfile_user {
