@@ -76,3 +76,5 @@ export function useBackgroundImageOrDefaultUrl(imageUrl?: string | null) {
   };
   return object;
 }
+
+export const BASE_URL = "obscure-dawn-29050.herokuapp.com";

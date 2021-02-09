@@ -2,7 +2,7 @@
 
 - [x] Create Account
 - [x] Log in
-- [ ] Edit Profile
+- [x] Edit Profile
 
 ## Host:
 

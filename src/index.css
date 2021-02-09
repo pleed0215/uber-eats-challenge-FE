@@ -25,6 +25,10 @@
   @apply text-lg font-bold text-white bg-purple-600 hover:bg-purple-800 transition duration-300 mt-4 py-2 px-4 rounded-lg focus:outline-none;
 }
 
+.form__input_wrapper {
+  @apply flex flex-col w-full;
+}
+
 @keyframes dropdownShow {
   from {
     opacity: 0;
@@ -41,11 +45,9 @@
 @keyframes dropdownHide {
   from {
     opacity: 1;
-    transform: scale(100%);
   }
   to {
     opacity: 0;
-    transform: scale(95%);
   }
 }
 

@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import {
@@ -8,11 +8,11 @@ import {
 } from "../../codegen/MutationEditProfile";
 import { ButtonInactivable } from "../../components/ButtonInactivable";
 import { GQL_QUERY_ME, useMe } from "../../hooks/useMe";
-import { EMAIL_REGEX } from "../../utils";
+import { EMAIL_REGEX, BASE_URL } from "../../utils";
 import { UserRole } from "../auth/auth";
 
 interface IForm {
-  portrait?: string;
+  portrait?: FileList | null;
   email: string;
   password: string;
   password2: string;
@@ -43,6 +43,7 @@ export const EditProfilePage = () => {
   });
   const history = useHistory();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [defaultPortrait, setDefaultPortrait] = useState<any>();
   const { data: me, loading: meLoading } = useMe();
 
   const [editProfile, { data, loading }] = useMutation<
@@ -60,7 +61,24 @@ export const EditProfilePage = () => {
     ],
   });
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
+    const portraitFile = getValues("portrait");
+    let portrait = null;
+
+    if (portraitFile && portraitFile?.length > 0) {
+      setIsSubmitting(true);
+      const actualFile = portraitFile[0];
+      const formBody = new FormData();
+      formBody.append("file", actualFile);
+      const { url } = await (
+        await fetch(`https://${BASE_URL}/upload`, {
+          method: "POST",
+          body: formBody,
+        })
+      ).json();
+      portrait = url;
+    }
+
     if (formState.isValid) {
       const editProfileInput = getValues();
       if (
@@ -68,9 +86,9 @@ export const EditProfilePage = () => {
         editProfileInput.password2 !== ""
       ) {
         if (editProfileInput.password === editProfileInput.password2) {
-          const { password2, ...input } = editProfileInput;
+          const { password2, portrait: _, ...input } = editProfileInput;
           setIsSubmitting(true);
-          editProfile({ variables: { input } });
+          editProfile({ variables: { input: { ...input, portrait } } });
         } else {
           setError("password2", { message: "Please confirm password" });
         }
@@ -78,13 +96,25 @@ export const EditProfilePage = () => {
         const { password, password2, ...input } = editProfileInput;
 
         setIsSubmitting(true);
-        editProfile({ variables: { input } });
+        editProfile({ variables: { input: { ...input, portrait } } });
       }
     }
   };
 
+  const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      e.preventDefault();
+      const file = e.target.files[0];
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        setDefaultPortrait(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   useEffect(() => {
-    setValue("portrait", me?.me.portrait);
+    setDefaultPortrait(me?.me.portrait);
     setValue("email", me?.me.email);
     setValue("role", me?.me.role);
     setValue("name", me?.me.name);
@@ -92,13 +122,13 @@ export const EditProfilePage = () => {
 
   return (
     <div className="w-screen min-h-screen flex flex-col items-center bg-gray-800">
-      <div className="layout__container flex flex-col bg-red-800 items-center mt-24">
+      <div className="layout__container flex flex-col  items-center mt-24">
         <h4 className="text-white text-2xl font-bold">Edit profile page</h4>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full max-w-screen-sm border border-purple-200 px-5 py-10 mt-3 flex flex-col"
+          className="w-full max-w-sm border border-purple-200 px-5 py-10 mt-3 flex flex-col rounded-lg items-center bg-purple-200 text-purple-600 font-bold"
         >
-          <div className="flex flex-col mb-6">
+          <div className="form__input_wrapper mb-6">
             <input
               ref={register({
                 required: {
@@ -119,7 +149,7 @@ export const EditProfilePage = () => {
               <span className="form__error mt-1">{errors.email.message}</span>
             )}
           </div>
-          <div className="flex flex-col mb-6">
+          <div className="form__input_wrapper mb-6">
             <input
               ref={register({
                 minLength: {
@@ -140,7 +170,7 @@ export const EditProfilePage = () => {
               <span className="form__error mt-1">{errors.name.message}</span>
             )}
           </div>
-          <div className="flex flex-col mb-6">
+          <div className="form__input_wrapper mb-6">
             <input
               ref={register({
                 minLength: {
@@ -163,7 +193,7 @@ export const EditProfilePage = () => {
               </span>
             )}
           </div>
-          <div className="flex flex-col mb-6">
+          <div className="form__input_wrapper mb-6">
             <input
               ref={register({
                 minLength: {
@@ -189,12 +219,25 @@ export const EditProfilePage = () => {
           <select
             ref={register()}
             name="role"
-            className="w-full border rounded-lg py-4 px-5 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-opacity-80 outline-none transition duration-500"
+            className="w-full border rounded-lg py-4 px-5 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-opacity-80 outline-none transition duration-500 mb-4"
             defaultValue="Host"
           >
             <option>Host</option>
             <option>Listener</option>
           </select>
+          <div className="w-32 h-32 p-1 border rounded-lg border-purple-600 mb-3 flex items-center justify-center">
+            <img src={defaultPortrait} className="w-28 h-28" />
+          </div>
+          <div className="form__input_wrapper">
+            <input
+              className="form__input border-purple-600"
+              type="file"
+              name="portrait"
+              accept="image/*"
+              ref={register()}
+              onChange={onImageChange}
+            />
+          </div>
           <ButtonInactivable isActivate={!isSubmitting} loading={isSubmitting}>
             Update
           </ButtonInactivable>
