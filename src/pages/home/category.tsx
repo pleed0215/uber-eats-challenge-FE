@@ -12,7 +12,7 @@ import { PodcastList } from "../../components/PodcastList";
 import { FRAGMENT_PODCAST } from "../../fragments";
 import { useQueryParam } from "../../hooks/useQueryParam";
 
-const categories = [
+export const categories = [
   "Book",
   "Design",
   "Fashion",
