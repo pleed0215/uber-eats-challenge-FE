@@ -20,5 +20,6 @@ export interface PartReview {
   id: number;
   content: string;
   rating: number;
+  createdAt: any;
   reviewer: PartReview_reviewer;
 }

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 import { PartReview } from "../codegen/PartReview";
-import { getRandomSoftBgColor } from "../utils";
+import { getRandomSoftBgColor, timeSince } from "../utils";
 
 interface ReveiwItemProps {
   review?: PartReview | null;
@@ -43,7 +43,12 @@ export const ReviewItem: React.FC<ReveiwItemProps> = ({ review }) => {
         </div>
       </Link>
       <hr />
-      <div className="mt-2 w-full italic text-sm">'{review?.content}'</div>
+      <div className="mt-2 w-full italic text-sm">
+        <p className="text-purple-200 text-xs">
+          {timeSince(review?.createdAt)} ago
+        </p>
+        <p>'{review?.content}'</p>
+      </div>
     </div>
   );
 };

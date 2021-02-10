@@ -5,6 +5,7 @@ import {
   QueryByCategory,
   QueryByCategoryVariables,
 } from "../../codegen/QueryByCategory";
+import { HelmetOnlyTitle } from "../../components/HelmetOnlyTitle";
 import { LoaderWithLogo } from "../../components/LoaderWithLogo";
 import { Pagination } from "../../components/Pagination";
 import { PodcastList } from "../../components/PodcastList";
@@ -109,6 +110,7 @@ export const CategoryPage = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center bg-gray-800">
+      <HelmetOnlyTitle title="Category" />
       <div className="layout__container px-2">
         {!categoryName ? (
           <div className="text-white py-8">

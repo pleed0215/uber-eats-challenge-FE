@@ -1,4 +1,5 @@
 import {
+  faBroadcastTower,
   faCoffee,
   faPodcast,
   faSearch,
@@ -8,15 +9,21 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { UserRole } from "../codegen/globalTypes";
 import { useMe } from "../hooks/useMe";
 import { getRandomSoftBgColor, useBackgroundImageOrDefaultUrl } from "../utils";
 
 interface PopupMenuProps {
   dropdownRef: React.MutableRefObject<HTMLDivElement>;
   popup: boolean | null;
+  isHost?: boolean | null;
 }
 
-const PopupMenu: React.FC<PopupMenuProps> = ({ dropdownRef, popup }) => {
+const PopupMenu: React.FC<PopupMenuProps> = ({
+  dropdownRef,
+  popup,
+  isHost,
+}) => {
   return (
     <div
       ref={dropdownRef}
@@ -27,6 +34,24 @@ const PopupMenu: React.FC<PopupMenuProps> = ({ dropdownRef, popup }) => {
       }`}
     >
       <div className="py-1" role="menu" aria-orientation="vertical">
+        {isHost === true && (
+          <>
+            <Link
+              to="/host"
+              className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
+              role="menuitem"
+            >
+              <FontAwesomeIcon
+                icon={faBroadcastTower}
+                size="lg"
+                className="mr-3"
+              />
+              HOST
+            </Link>
+            <hr />
+          </>
+        )}
+
         <Link
           to="/category"
           className="block px-4 py-2 text-sm text-purple-700 hover:bg-purple-200 hover:text-puple-900"
@@ -146,6 +171,20 @@ export const Header = () => {
                 My Page
               </li>
             </Link>
+            {data?.me.role === UserRole.Host && (
+              <Link
+                to="/host"
+                className="hover:scale-y-125 transform transition duration-300"
+              >
+                <li
+                  className={`pb-2 ${
+                    pathname === "/host" && "border-b-4 border-purple-400 "
+                  }`}
+                >
+                  HOST
+                </li>
+              </Link>
+            )}
           </ul>
         </div>
         <div className="flex items-center font-bold text-white min-w-max text-sm relative">
@@ -167,7 +206,11 @@ export const Header = () => {
               </div>
             </div>
           </button>
-          <PopupMenu dropdownRef={dropdownRef} popup={popup} />
+          <PopupMenu
+            dropdownRef={dropdownRef}
+            popup={popup}
+            isHost={data?.me.role === UserRole.Host}
+          />
         </div>
       </div>
       <div className="layout__container md:hidden sm:flex px-6 pt-4 bg-gray-800 ">
@@ -191,7 +234,11 @@ export const Header = () => {
               </div>
             </button>
 
-            <PopupMenu dropdownRef={dropdownRef} popup={popup} />
+            <PopupMenu
+              dropdownRef={dropdownRef}
+              popup={popup}
+              isHost={data?.me.role === UserRole.Host}
+            />
           </div>
         </div>
       </div>

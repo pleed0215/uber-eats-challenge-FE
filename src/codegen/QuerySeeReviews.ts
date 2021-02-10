@@ -20,6 +20,7 @@ export interface QuerySeeReviews_seePodcastReviews_reviews {
   id: number;
   content: string;
   rating: number;
+  createdAt: any;
   reviewer: QuerySeeReviews_seePodcastReviews_reviews_reviewer;
 }
 

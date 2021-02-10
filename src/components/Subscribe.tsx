@@ -62,9 +62,10 @@ export const SubscribeButton: React.FC<SubscribeButtonProps> = ({
 
   return (
     <div
-      className={`rounded-2xl border border-purple-200 px-2 py-1 flex justify-center ${
+      className={`rounded-2xl border border-purple-200 hover:bg-purple-200 hover:text-purple-600 transition duration-300 px-2 py-1 flex justify-center ${
         loading && "animate-pulse bg-purple-200"
       }`}
+      style={{ minWidth: "8rem" }}
     >
       {!loading && !isToggling && (
         <div className="cursor-pointer" onClick={onClick}>

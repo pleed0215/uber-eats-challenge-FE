@@ -12,12 +12,16 @@ import { CategoryPage } from "../pages/home/category";
 import { SearchPage } from "../pages/home/search";
 import { UserPage } from "../pages/home/user";
 import { EditProfilePage } from "../pages/home/edit-profile";
+import { HostPage } from "../pages/host/host";
 
 export const LoggedInRouter = () => {
   return (
     <Router>
       <Header />
       <Switch>
+        <Route path="/host" exact>
+          <HostPage />
+        </Route>
         <Route path="/user/:id" exact>
           <UserPage isSelf={false} />
         </Route>

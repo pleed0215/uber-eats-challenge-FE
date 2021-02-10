@@ -1,5 +1,6 @@
 import {
   faGlobeAsia,
+  faHeart,
   faPlus,
   faShare,
   faShareAlt,
@@ -43,12 +44,21 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
         </div>
       ) : (
         <div className="w-full px-4 py-4 flex">
-          <div
-            className="w-32 h-32 bg-cover bg-center rounded-lg mr-3"
-            style={{ backgroundImage: `url(${podcast?.thumbnail})` }}
-          />
+          <div className="flex flex-col items-center">
+            <div
+              className="w-32 h-32 bg-cover bg-center rounded-lg mr-3"
+              style={{ backgroundImage: `url(${podcast?.thumbnail})` }}
+            />
+            {podcast?.isOnSubscribe && (
+              <div className="flex items-center my-1 py-1 px-2 rounded-3xl border border-purple-200 w-28">
+                <FontAwesomeIcon icon={faHeart} size="xs" />
+                <span className="ml-2 text-xs italic">Subscribed</span>
+              </div>
+            )}
+          </div>
           <div className="w-2/3 max-w-2/3 h-30 flex flex-col overflow-ellipsis">
             <h4 className="text-2xl font-semibold mb-2">{podcast?.title}</h4>
+
             <div className="flex items-center">
               <p className="-mr-6 border-l border-b border-t px-2 rounded-l-3xl h-9 bg-purple-200 text-purple-800 flex items-center z-10">
                 <strong>Host</strong>

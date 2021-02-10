@@ -148,11 +148,13 @@ export const PodcastPage = () => {
           podcast={podcast?.getPodcast.podcast}
           loading={loadingPodcast}
         />
-        <ReviewForm
-          podcastId={+id}
-          loading={loadingPodcast}
-          reviewed={podcast?.getPodcast.podcast?.reviewedPodcast}
-        />
+        {podcast?.getPodcast.podcast?.isOnSubscribe && (
+          <ReviewForm
+            podcastId={+id}
+            loading={loadingPodcast}
+            reviewed={podcast?.getPodcast.podcast?.reviewedPodcast}
+          />
+        )}
         {!loadingPodcast && !loadingEpispde && !loadingReview && (
           <div className="h-10 border-b border-purple-200 mt-10 flex justify-center items-center text-white mb-4">
             <button

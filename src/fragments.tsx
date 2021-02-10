@@ -46,6 +46,7 @@ export const FRAGMENT_REVIEW = gql`
     id
     content
     rating
+    createdAt
     reviewer {
       id
       name
