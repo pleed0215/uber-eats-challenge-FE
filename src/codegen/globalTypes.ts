@@ -12,6 +12,17 @@ export enum UserRole {
   Listener = "Listener",
 }
 
+export interface CreateEpisodeInput {
+  title: string;
+  category: string;
+  podcastId: number;
+}
+
+export interface CreatePodcastInput {
+  title: string;
+  category: string;
+}
+
 export interface EditProfileInput {
   email?: string | null;
   name?: string | null;
@@ -20,10 +31,25 @@ export interface EditProfileInput {
   portrait?: string | null;
 }
 
+export interface EpisodesSearchInput {
+  podcastId: number;
+  episodeId: number;
+}
+
+export interface GetEpisodesInput {
+  page?: number | null;
+  pageSize?: number | null;
+  podcastId: number;
+}
+
 export interface GetPodcastsByCategoryInput {
   page?: number | null;
   pageSize?: number | null;
   category: string;
+}
+
+export interface PodcastSearchInput {
+  id: number;
 }
 
 export interface ReviewPodcastInput {
@@ -45,6 +71,24 @@ export interface SeeSubscriptionInput {
 
 export interface ToggleSubscriptionInput {
   podcastId: number;
+}
+
+export interface UpdateEpisodeInput {
+  podcastId: number;
+  episodeId: number;
+  title?: string | null;
+  category?: string | null;
+}
+
+export interface UpdatePodcastInput {
+  id: number;
+  payload: UpdatePodcastPayload;
+}
+
+export interface UpdatePodcastPayload {
+  title?: string | null;
+  category?: string | null;
+  rating?: number | null;
 }
 
 //==============================================================

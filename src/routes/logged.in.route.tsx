@@ -13,12 +13,35 @@ import { SearchPage } from "../pages/home/search";
 import { UserPage } from "../pages/home/user";
 import { EditProfilePage } from "../pages/home/edit-profile";
 import { HostPage } from "../pages/host/host";
+import { DoPodcast } from "../pages/host/do-podcast";
+import { DoEpisode } from "../pages/host/do-episode";
 
 export const LoggedInRouter = () => {
   return (
     <Router>
       <Header />
       <Switch>
+        <Route path="/host/:id/episode/:episodeId/delete" exact>
+          <DoEpisode />
+        </Route>
+        <Route path="/host/:id/episode/:episodeId/update" exact>
+          <DoEpisode />
+        </Route>
+        <Route path="/host/:id/episode/create" exact>
+          <DoEpisode />
+        </Route>
+        <Route path="/host/:id/episode" exact>
+          <EpisodePage />
+        </Route>
+        <Route path="/host/:id/delete" exact>
+          <DoPodcast />
+        </Route>
+        <Route path="/host/:id/update" exact>
+          <DoPodcast />
+        </Route>
+        <Route path="/host/create" exact>
+          <DoPodcast />
+        </Route>
         <Route path="/host" exact>
           <HostPage />
         </Route>
