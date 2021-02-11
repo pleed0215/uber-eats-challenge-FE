@@ -44,7 +44,7 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
           </div>
         </div>
       ) : (
-        <div className="w-full px-4 py-4 flex">
+        <div className="w-full px-4 py-4 flex md:flex-row sm:flex-col flex-col">
           <div className="flex flex-col items-center">
             <div
               className="w-32 h-32 bg-cover bg-center rounded-lg mr-3"
@@ -57,7 +57,7 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
               </div>
             )}
           </div>
-          <div className="w-2/3 max-w-2/3 h-30 flex flex-col overflow-ellipsis">
+          <div className="md:max-w-2/3 sm:w-full w-full h-30 flex flex-col overflow-ellipsis">
             <h4 className="text-2xl font-semibold mb-2">{podcast?.title}</h4>
 
             <div className="flex items-center">
