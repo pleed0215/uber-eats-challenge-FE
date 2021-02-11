@@ -67,7 +67,7 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
               <div className="flex items-center border-b-2 border-t-2 border-r-2  px-2 rounded-r-3xl pl-8 w-full">
                 <Link
                   to={`/user/${podcast?.host.id}`}
-                  className="flex items-center"
+                  className="flex items-center truncate"
                 >
                   <div
                     className=" w-8 h-8 bg-cover bg-center rounded-full bg-blue-200 mr-4 z-20"
