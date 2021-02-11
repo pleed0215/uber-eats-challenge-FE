@@ -17,7 +17,7 @@ import { Pagination } from "../../components/Pagination";
 import { FRAGMENT_EPISODE } from "../../fragments";
 import { GQL_GET_EPISODES } from "./podcast";
 
-const GQL_GET_EPISODE = gql`
+export const GQL_GET_EPISODE = gql`
   query QueryGetEpisode($podcastId: Int!, $episodeId: Int!) {
     getEpisode(input: { podcastId: $podcastId, episodeId: $episodeId }) {
       ok

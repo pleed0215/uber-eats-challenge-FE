@@ -26,7 +26,7 @@ export const EpisodeItem: React.FC<IEpisodeItem> = ({ episode }) => {
       <Link to={`/podcast/${episode?.podcast.id}/episodes/${episode?.id}`}>
         <div className="flex items-center mb-4">
           <div
-            className="w-16 h-16 bg-cover bg-center mr-4 rounded-md"
+            className="w-16 h-16 bg-cover bg-center mr-4 rounded-md bg-purple-100"
             style={useBackgroundImageOrDefaultUrl(episode?.podcast.thumbnail)}
           />
           <div className="flex flex-col justify-center">

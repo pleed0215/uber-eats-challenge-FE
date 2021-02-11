@@ -77,7 +77,7 @@ export const HostPage = () => {
                     <div className="flex justify-around items-center mt-1">
                       <Link
                         to={`/host/${podcast.id}/update`}
-                        className="form__button mt-1"
+                        className="form__button mt-1 mr-2"
                       >
                         Update
                       </Link>

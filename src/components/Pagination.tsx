@@ -20,6 +20,10 @@ export const Pagination: React.FC<PaginationProps> = ({
   totalPage,
   loading = false,
 }) => {
+  if (!loading && totalPage && totalPage <= 1) {
+    return <></>;
+  }
+
   return loading ? (
     <div className="py-4 px-20 bg-purple-200 rounded-md animate-pulse" />
   ) : (

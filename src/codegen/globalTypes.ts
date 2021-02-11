@@ -15,9 +15,9 @@ export enum UserRole {
 export interface CreateEpisodeInput {
   title: string;
   description?: string | null;
-  category: string;
-  url?: string | null;
   podcastId: number;
+  url?: string | null;
+  playLength?: number | null;
 }
 
 export interface CreatePodcastInput {
@@ -38,12 +38,6 @@ export interface EditProfileInput {
 export interface EpisodesSearchInput {
   podcastId: number;
   episodeId: number;
-}
-
-export interface GetEpisodesInput {
-  page?: number | null;
-  pageSize?: number | null;
-  podcastId: number;
 }
 
 export interface GetPodcastsByCategoryInput {
@@ -80,6 +74,7 @@ export interface ToggleSubscriptionInput {
 export interface UpdateEpisodeInput {
   title?: string | null;
   description?: string | null;
+  playLength?: number | null;
   url?: string | null;
   episodeId: number;
   podcastId: number;
