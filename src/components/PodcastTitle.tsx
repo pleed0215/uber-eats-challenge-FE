@@ -60,7 +60,7 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
           <div className="md:max-w-2/3 sm:w-full w-full h-30 flex flex-col overflow-ellipsis">
             <h4 className="text-2xl font-semibold mb-2">{podcast?.title}</h4>
 
-            <div className="flex items-center">
+            <div className="flex items-center max-w-xs">
               <p className="-mr-6 border-l border-b border-t px-2 rounded-l-3xl h-9 bg-purple-200 text-purple-800 flex items-center z-10">
                 <strong>Host</strong>
               </p>
@@ -84,7 +84,7 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
                 </Link>
               </div>
             </div>
-            <p className="overflow-ellipsis">{podcast?.description}</p>
+            <p className="overflow-ellipsis mt-2">{podcast?.description}</p>
             <div className="flex items-center mt-4 text-purple-200">
               <SubscribeButton podcast={podcast} loading={loading} />
               <FontAwesomeIcon icon={faGlobeAsia} size="lg" className="mx-5" />
