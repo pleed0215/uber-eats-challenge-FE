@@ -64,7 +64,7 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
               <p className="-mr-6 border-l border-b border-t px-2 rounded-l-3xl h-9 bg-purple-200 text-purple-800 flex items-center z-10">
                 <strong>Host</strong>
               </p>
-              <div className="flex items-center border-b-2 border-t-2 border-r-2  px-2 rounded-r-3xl pl-8">
+              <div className="flex items-center border-b-2 border-t-2 border-r-2  px-2 rounded-r-3xl pl-8 w-full">
                 <Link
                   to={`/user/${podcast?.host.id}`}
                   className="flex items-center"
@@ -80,7 +80,7 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
                     }}
                   />
 
-                  <span className="mr-4">{podcast?.host.email}</span>
+                  <span className="mr-4 truncate">{podcast?.host.email}</span>
                 </Link>
               </div>
             </div>
