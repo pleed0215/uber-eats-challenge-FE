@@ -178,7 +178,7 @@ export const Header = () => {
               >
                 <li
                   className={`pb-2 ${
-                    pathname === "/host" && "border-b-4 border-purple-400 "
+                    pathname.includes("host") && "border-b-4 border-purple-400 "
                   }`}
                 >
                   HOST
