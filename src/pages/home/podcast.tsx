@@ -155,6 +155,11 @@ export const PodcastPage = () => {
             reviewed={podcast?.getPodcast.podcast?.reviewedPodcast}
           />
         )}
+        {!podcast?.getPodcast.podcast?.isOnSubscribe && (
+          <p className="text-white italic underline">
+            * Subscribe and write a review this podcast
+          </p>
+        )}
         {!loadingPodcast && !loadingEpispde && !loadingReview && (
           <div className="h-10 border-b border-purple-200 mt-10 flex justify-center items-center text-white mb-4">
             <button
