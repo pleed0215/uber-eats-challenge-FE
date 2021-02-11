@@ -149,7 +149,7 @@ export const AuthPage: React.FC = () => {
   return (
     <div className="w-screen h-screen min-w-max flex justify-center font-mono bg-gradient-to-tr from-indigo-300 via-white to-purple-300">
       <HelmetOnlyTitle title={loginPage ? "Login" : "Create Account"} />
-      <div className="w-full max-w-sm max-h-1/2  bg-purple-300 flex flex-col items-center p-8 relative mt-20 shadow-lg rounded-lg">
+      <div className="w-full max-w-sm   bg-purple-300 flex flex-col items-center p-8 relative my-20 shadow-lg rounded-lg ">
         <div className=" bg-gray-50 absolute -top-16 flex items-center justify-center  rounded-full w-32 h-32 bg-opacity-80">
           <img
             className={`w-20 h-20 ${
@@ -185,7 +185,7 @@ export const AuthPage: React.FC = () => {
                 className="w-full border rounded-lg  py-3 px-5 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-opacity-80 outline-none transition duration-500"
               />
               <FontAwesomeIcon
-                className="text-gray-600 absolute right-5"
+                className="text-purple-600 absolute right-5"
                 icon={faMailBulk}
               />
             </div>
@@ -218,7 +218,7 @@ export const AuthPage: React.FC = () => {
                 className="w-full border rounded-lg py-3 px-5 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-opacity-80 outline-none transition duration-500"
               />
               <FontAwesomeIcon
-                className="text-gray-600 right-5 absolute"
+                className="text-purple-600 right-5 absolute"
                 icon={faKey}
               />
             </div>
@@ -253,7 +253,7 @@ export const AuthPage: React.FC = () => {
                     className="w-full border rounded-lg py-3 px-5 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-opacity-80 outline-none transition duration-500"
                   />
                   <FontAwesomeIcon
-                    className="text-gray-600 right-5 absolute"
+                    className="text-purple-600 right-5 absolute"
                     icon={faKey}
                   />
                 </div>

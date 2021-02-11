@@ -7,7 +7,7 @@ interface ILoader {
 export const Loader: React.FC<ILoader> = ({ size = 5, color = "#0d335d" }) => {
   return (
     <div
-      className={`animate-spin w-${size} h-${size} rounded-full border-2 border-gray-200`}
+      className={`animate-spin w-6 h-6 rounded-full border border-t-2 border-gray-200`}
       style={{ borderTopColor: color }}
     />
   );
