@@ -67,12 +67,12 @@ export const HostEpisodePage = () => {
     <div className="w-screen min-h-screen flex justify-center bg-gray-800">
       {(loadingPodcast || loadingEpisodes) && <LoaderWithLogo />}
       {!loadingPodcast && !loadingEpisodes && (
-        <div className="layout__container max-w-screen-sm min-w-max flex flex-col mt-12">
+        <div className="layout__container   flex flex-col mt-12 px-2">
           <h4 className="text-xl font-bold text-white">
             Podcast: {podcast?.getPodcast.podcast?.title}
           </h4>
-          <div className="flex items-start mt-3">
-            <div className="flex flex-col mr-2">
+          <div className="flex items-start mt-3 w-full">
+            <div className="flex flex-col mr-2 w-26">
               <div
                 className="w-24 h-24 bg-center bg-cover rounded-lg bg-purple-100"
                 style={useBackgroundImageOrDefaultUrl(
@@ -86,7 +86,7 @@ export const HostEpisodePage = () => {
                 Update
               </Link>
             </div>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full overflow-hidden">
               <div className="flex flex-col  text-white p-2 border rounded-lg w-full">
                 <h6 className="text-md font-bold">
                   <strong>Category: </strong>
@@ -94,7 +94,7 @@ export const HostEpisodePage = () => {
                 </h6>
 
                 <h6 className="text-md font-bold">Description</h6>
-                <p className="text-sm mt-2">
+                <p className="text-sm mt-2 block truncate">
                   {podcast?.getPodcast.podcast?.description}
                 </p>
                 <h6 className="text-md font-bold mt-4">
@@ -123,7 +123,7 @@ export const HostEpisodePage = () => {
                     Table Column: ID, since ago, play length, title, description(ellipis), menu*/}
             {episodes?.getEpisodes.totalCount !== 0 && (
               <table
-                className="table-fixed border-collapse text-white border  rounded-lg mt-4"
+                className="table-fixed border-collapse text-white border w-full rounded-lg mt-4"
                 cellPadding="8px"
               >
                 <thead>
@@ -132,7 +132,7 @@ export const HostEpisodePage = () => {
                   <th className=" w-1/6">Listened</th>
                   <th className="w-1/6">Length</th>
                   <th className="w-1/2">Description</th>
-                  <th className="w-1/12">Menu</th>
+                  <th className="w-1/12 truncate">Menu</th>
                 </thead>
                 <tbody className="text-xs text-center">
                   {episodes?.getEpisodes.episodes?.map((episode) => (
@@ -144,7 +144,9 @@ export const HostEpisodePage = () => {
                       <td>{episode.title}</td>
                       <td>{episode.watchCounter}</td>
                       <td>{secondsToTime(episode.playLength || 0)}</td>
-                      <td className="text-left">{episode.description}</td>
+                      <td className="text-left truncate">
+                        {episode.description}
+                      </td>
                       <td>
                         <div className="flex items-center justify-around">
                           <Link

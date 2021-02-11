@@ -187,7 +187,7 @@ export const Header = () => {
             )}
           </ul>
         </div>
-        <div className="flex items-center font-bold text-white min-w-max text-sm relative">
+        <div className="flex items-center font-bold text-white w-56 text-sm relative">
           <button onClick={onPopupClick} onBlur={onDropdownFocusOut}>
             <div className="mr-2 flex items-center">
               {data && loading === false && (
@@ -196,8 +196,10 @@ export const Header = () => {
                   style={useBackgroundImageOrDefaultUrl(data?.me.portrait)}
                 />
               )}
-              <div className="flex flex-col">
-                {data && loading === false && <span>{data.me.email}</span>}
+              <div className="flex flex-col w-47">
+                {data && loading === false && (
+                  <p className="w-full overflow-hidden">{data.me.email}</p>
+                )}
                 {data && loading === false && data?.me.name && (
                   <span className="text-xs -mt-1 italic">
                     ({data?.me.name})
@@ -228,9 +230,16 @@ export const Header = () => {
                   className={`mr-1 w-7 h-7 bg-cover bg-center rounded-full ${getRandomSoftBgColor()}`}
                   style={useBackgroundImageOrDefaultUrl(data?.me.portrait)}
                 />
-                {data &&
-                  loading === false &&
-                  `${data.me.email}${data.me.name ? `(${data.me.name})` : ""}`}
+                <div className="flex flex-col w-47">
+                  {data && loading === false && (
+                    <span className="w-47 truncate">{data.me.email}</span>
+                  )}
+                  {data && loading === false && data?.me.name && (
+                    <span className="text-xs -mt-1 italic">
+                      ({data?.me.name})
+                    </span>
+                  )}
+                </div>
               </div>
             </button>
 
