@@ -14,13 +14,17 @@ export enum UserRole {
 
 export interface CreateEpisodeInput {
   title: string;
+  description?: string | null;
   category: string;
+  url?: string | null;
   podcastId: number;
 }
 
 export interface CreatePodcastInput {
   title: string;
   category: string;
+  description?: string | null;
+  thumbnail?: string | null;
 }
 
 export interface EditProfileInput {
@@ -74,21 +78,19 @@ export interface ToggleSubscriptionInput {
 }
 
 export interface UpdateEpisodeInput {
-  podcastId: number;
-  episodeId: number;
   title?: string | null;
-  category?: string | null;
+  description?: string | null;
+  url?: string | null;
+  episodeId: number;
+  podcastId: number;
 }
 
 export interface UpdatePodcastInput {
-  id: number;
-  payload: UpdatePodcastPayload;
-}
-
-export interface UpdatePodcastPayload {
   title?: string | null;
   category?: string | null;
-  rating?: number | null;
+  description?: string | null;
+  thumbnail?: string | null;
+  podcastId: number;
 }
 
 //==============================================================

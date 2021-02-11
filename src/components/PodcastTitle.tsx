@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 import { PartPodcast } from "../codegen/PartPodcast";
+import { useBackgroundImageOrDefaultUrl } from "../utils";
 import { SubscribeButton } from "./Subscribe";
 
 interface PodcastTitleProps {
@@ -47,7 +48,7 @@ export const PodcastTitle: React.FC<PodcastTitleProps> = ({
           <div className="flex flex-col items-center">
             <div
               className="w-32 h-32 bg-cover bg-center rounded-lg mr-3"
-              style={{ backgroundImage: `url(${podcast?.thumbnail})` }}
+              style={useBackgroundImageOrDefaultUrl(podcast?.thumbnail)}
             />
             {podcast?.isOnSubscribe && (
               <div className="flex items-center my-1 py-1 px-2 rounded-3xl border border-purple-200 w-28">

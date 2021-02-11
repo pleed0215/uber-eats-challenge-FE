@@ -35,5 +35,6 @@ export interface PartEpisode {
   createdAt: any;
   haveSeen: boolean;
   watchCounter: number;
+  url: string | null;
   podcast: PartEpisode_podcast;
 }

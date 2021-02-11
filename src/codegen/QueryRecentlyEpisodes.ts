@@ -35,6 +35,7 @@ export interface QueryRecentlyEpisodes_getRecentlyEpisodes_episodes {
   createdAt: any;
   haveSeen: boolean;
   watchCounter: number;
+  url: string | null;
   podcast: QueryRecentlyEpisodes_getRecentlyEpisodes_episodes_podcast;
 }
 

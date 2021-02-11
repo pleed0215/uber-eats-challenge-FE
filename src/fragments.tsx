@@ -65,6 +65,7 @@ export const FRAGMENT_EPISODE = gql`
     createdAt
     haveSeen
     watchCounter
+    url
     podcast {
       id
       title

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 import { PartPodcast } from "../codegen/PartPodcast";
+import { useBackgroundImageOrDefaultUrl } from "../utils";
 
 interface IPodcastList {
   podcasts?: Array<PartPodcast> | null;
@@ -35,7 +36,7 @@ export const PodcastList: React.FC<IPodcastList> = ({
             >
               <div
                 className="bg-blue-100 h-52 rounded-lg bg-cover bg-center flex flex-col justify-between"
-                style={{ backgroundImage: `url(${podcast.thumbnail})` }}
+                style={useBackgroundImageOrDefaultUrl(podcast.thumbnail)}
               >
                 <div className="w-full flex bg-gray-800 bg-opacity-50 px-2 justify-between">
                   <p className="text-xs truncate">
