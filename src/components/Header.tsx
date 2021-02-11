@@ -112,7 +112,7 @@ export const Header = () => {
   };
 
   return (
-    <div className="w-full flex justify-center bg-gray-800 shadow-lg border-b-2 border-gray-500 min-w-max">
+    <div className="w-full flex justify-center bg-gray-800 shadow-lg border-b-2 border-gray-500 ">
       <div className="layout__container xl:max-w-screen-lg lg:max-w-screen-md  md:flex sm:hidden hidden  px-4 pt-4 bg-gray-800 justify-between">
         <div className="flex font-bold text-white -mb-1 w-full max-w-2xl">
           <Link to="/" className="mr-6">
@@ -189,16 +189,16 @@ export const Header = () => {
         </div>
         <div className="flex items-center font-bold text-white w-56 text-sm relative">
           <button onClick={onPopupClick} onBlur={onDropdownFocusOut}>
-            <div className="mr-2 flex items-center">
+            <div className="mr-2 flex items-center w-56">
               {data && loading === false && (
                 <div
                   className={`mr-1 w-7 h-7 bg-cover bg-center rounded-full ${getRandomSoftBgColor()}`}
                   style={useBackgroundImageOrDefaultUrl(data?.me.portrait)}
                 />
               )}
-              <div className="flex flex-col w-47">
+              <div className="flex flex-col w-47 truncate">
                 {data && loading === false && (
-                  <p className="w-full overflow-hidden">{data.me.email}</p>
+                  <p className="w-full truncate">{data.me.email}</p>
                 )}
                 {data && loading === false && data?.me.name && (
                   <span className="text-xs -mt-1 italic">
@@ -223,7 +223,7 @@ export const Header = () => {
               style={{ backgroundImage: `url(/podcast.svg)` }}
             />
           </Link>
-          <div className="flex items-center font-bold text-purple-200 min-w-max relative">
+          <div className="flex items-center font-bold text-purple-200  relative">
             <button onClick={onPopupClick} onBlur={onDropdownFocusOut}>
               <div className="mr-2 hover:underline flex items-center text-sm">
                 <div
