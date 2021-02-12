@@ -98,7 +98,7 @@ export const PodcastPlayer = () => {
         playerState.setIsPlaying(false);
         audio.current.currentTime = 0;
         setCurrentTime(0);
-        if (playerState.episode) {
+        if (playerState.episode && !playerState.episode.haveSeen) {
           setLoading(true);
           markAsPlayed({
             variables: { input: { episodeId: playerState.episode?.id } },
