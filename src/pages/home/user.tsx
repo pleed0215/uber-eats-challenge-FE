@@ -132,15 +132,14 @@ export const UserPage: React.FC<{ isSelf: boolean }> = ({ isSelf = true }) => {
   };
 
   const onNext = () => {
-    if (seeSubscriptionData) {
-      const totalPage =
-        whichTab === "mystuff"
-          ? seeSubscriptionData.seeSubscribtions.totalPage
-          : myFeeds?.getFeeds.totalPage;
-      if (page < (totalPage || 0)) {
-        setPage(page + 1);
-      }
+    const totalPage =
+      whichTab === "mystuff"
+        ? seeSubscriptionData?.seeSubscribtions.totalPage
+        : myFeeds?.getFeeds.totalPage;
+    if (page < (totalPage || 0)) {
+      setPage(page + 1);
     }
+
     window.scrollTo(0, 0);
   };
 
