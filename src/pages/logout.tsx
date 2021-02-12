@@ -20,7 +20,7 @@ export const LogoutPage = () => {
   }, []);
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center text-2xl font-bold">
+    <div className="w-screen h-screen flex justify-center items-center text-2xl font-bold bg-gray-800 text-white">
       Bye Bye
     </div>
   );

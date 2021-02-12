@@ -82,8 +82,9 @@ export const PodcastPlayer = () => {
     playerState?.setIsPlaying(!playerState.isPlaying);
   };
 
-  const onSeek = () => {
-    audio.current.currentTime = currentTime;
+  const onSeek = (e: ChangeEvent<HTMLInputElement>) => {
+    setCurrentTime(+e.target.value);
+    audio.current.currentTime = +e.target.value;
   };
 
   useEffect(() => {
