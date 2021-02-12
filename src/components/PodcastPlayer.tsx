@@ -14,7 +14,7 @@ import React, {
   useState,
 } from "react";
 import { Link } from "react-router-dom";
-import { MarkAsPlay, MarkAsPlayVariables } from "../codegen/MarkAsPlay";
+import { MarkAsPlayed, MarkAsPlayedVariables } from "../codegen/MarkAsPlayed";
 import { GQL_GET_EPISODE } from "../pages/home/episode";
 import { PlayerContext } from "../routes/logged.in.route";
 import { secondsToString } from "../utils";
@@ -23,7 +23,7 @@ import { Loader } from "./Loader";
 let intervalHandler: NodeJS.Timeout;
 
 const GQL_MAKR_AS_PLAY = gql`
-  mutation MarkAsPlay($input: MarkEpisodeAsPlayedInput!) {
+  mutation MarkAsPlayed($input: MarkEpisodeAsPlayedInput!) {
     markEpisodeAsPlayed(input: $input) {
       ok
       error
@@ -40,7 +40,7 @@ export const PodcastPlayer = () => {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [markAsPlayed] = useMutation<MarkAsPlay, MarkAsPlayVariables>(
+  const [markAsPlayed] = useMutation<MarkAsPlayed, MarkAsPlayedVariables>(
     GQL_MAKR_AS_PLAY,
     {
       onCompleted: () => {
