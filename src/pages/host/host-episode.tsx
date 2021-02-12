@@ -442,7 +442,7 @@ export const HostEpisodePage = () => {
                     onPrev={onPrev}
                     currentPage={page}
                     loading={loadingListeners}
-                    totalPage={episodes?.getEpisodes.totalPage}
+                    totalPage={listeners?.getPodcastListeners.totalPage}
                   />
                 )}
               </div>

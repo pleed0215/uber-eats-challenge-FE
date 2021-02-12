@@ -6,19 +6,19 @@
 }
 
 .dropdown__show {
-  animation: dropdownShow ease-out 0.2s forwards;
+  animation: dropdownShow ease-out 0.3s forwards;
 }
 
 .dropdown__hide {
-  animation: dropdownHide ease-in 0.2s forwards;
+  animation: dropdownHide ease-in 0.3s forwards;
 }
 
 .player__show {
-  animation: playerShow ease-out 0.2s forwards;
+  animation: playerShow ease-out 0.4s forwards;
 }
 
 .player__hide {
-  animation: playerHide ease-in 0.2s forwards;
+  animation: playerHide ease-in 0.3s forwards;
 }
 
 .form__error {

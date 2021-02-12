@@ -77,7 +77,7 @@ const GQL_GET_FEEDS = gql`
 export const UserPage: React.FC<{ isSelf: boolean }> = ({ isSelf = true }) => {
   const { pathname } = useLocation();
   const { id } = useParams<{ id: string }>();
-  const [whichTab, setWhichTab] = useState<"mystuff" | "feeds">("feeds");
+  const [whichTab, setWhichTab] = useState<"mystuff" | "feeds">("mystuff");
   const me = useMe();
   const [
     seeProfile,
@@ -165,7 +165,7 @@ export const UserPage: React.FC<{ isSelf: boolean }> = ({ isSelf = true }) => {
             Edit Profile
           </Link>
         )}
-        {!seeProfileLoading && !loadingMyFeeds && (
+        {!seeProfileLoading && !loadingMyFeeds && isSelf && (
           <div className="w-full h-10 border-b border-purple-200 mt-10 flex justify-center items-center text-white mb-4">
             <button
               className={`py-2 px-10 focus:outline-none ${
@@ -179,6 +179,7 @@ export const UserPage: React.FC<{ isSelf: boolean }> = ({ isSelf = true }) => {
                 ? "My Podcast"
                 : "My Subscriptions"}
             </button>
+
             <button
               className={`px-10 py-2 text-white focus:outline-none  ${
                 whichTab === "feeds"
