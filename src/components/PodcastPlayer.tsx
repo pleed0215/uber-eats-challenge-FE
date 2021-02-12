@@ -119,7 +119,11 @@ export const PodcastPlayer = () => {
   return (
     playerState?.isShowing && (
       <div className="flex justify-center items-center inset-x-0 bottom-0 fixed">
-        <div className="w-full max-w-sm bg-gradient-to-br from-purple-800  to-indigo-800 text-white py-3 px-3 rounded-t-xl flex flex-col relative">
+        <div
+          className={`w-full max-w-sm bg-gradient-to-br from-purple-800  to-indigo-800 text-white py-3 px-3 rounded-t-xl flex flex-col relative ${
+            playerState.isShowing ? "player__show" : "player__hide"
+          }`}
+        >
           <button
             className="absolute w-8 h-8 right-0 top-0 hover:text-purple-300 duration-300 transition  focus:outline-none"
             onClick={onCloseClick}
