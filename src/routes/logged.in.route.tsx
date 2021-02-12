@@ -21,17 +21,19 @@ import { LoaderWithLogo } from "../components/LoaderWithLogo";
 import { HostEpisodePage } from "../pages/host/host-episode";
 import { PodcastPlayer } from "../components/PodcastPlayer";
 
+import { PartEpisode } from "../codegen/PartEpisode";
+
 interface IPlayerContext {
   isPlaying: boolean;
   isShowing: boolean;
   playLength: number | null;
-  title: string | null;
+  episode?: PartEpisode | null;
   fileUrl: string | null;
   setIsPlaying: React.Dispatch<boolean>;
   setIsShowing: React.Dispatch<boolean>;
   setPlayLength: React.Dispatch<number | null>;
   setFileUrl: React.Dispatch<string | null>;
-  setTitle: React.Dispatch<string | null>;
+  setEpisode: React.Dispatch<PartEpisode | null>;
 }
 
 export const PlayerContext = createContext<IPlayerContext | null>(null);
@@ -56,7 +58,7 @@ export const LoggedInRouter = () => {
   const { data, loading } = useMe();
   const [isShowing, setIsShowing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [title, setTitle] = useState<string | null>(null);
+  const [episode, setEpisode] = useState<PartEpisode | null>(null);
   const [playLength, setPlayLength] = useState<number | null>(0);
   const [fileUrl, setFileUrl] = useState<string | null>(null);
 
@@ -75,12 +77,12 @@ export const LoggedInRouter = () => {
         isPlaying,
         playLength,
         fileUrl,
-        title,
+        episode,
         setIsShowing,
         setIsPlaying,
         setPlayLength,
         setFileUrl,
-        setTitle,
+        setEpisode,
       }}
     >
       <Router>

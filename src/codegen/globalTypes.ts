@@ -46,6 +46,10 @@ export interface GetPodcastsByCategoryInput {
   category: string;
 }
 
+export interface MarkEpisodeAsPlayedInput {
+  episodeId: number;
+}
+
 export interface PodcastSearchInput {
   id: number;
 }

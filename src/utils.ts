@@ -86,7 +86,7 @@ export function secondsToString(secondsInput: number) {
   const oneMin = 60;
   const hours = Math.floor(secondsInput / oneHour);
   const minutes = Math.floor((secondsInput - hours * oneHour) / oneMin);
-  const seconds = secondsInput - hours * oneHour - minutes * oneMin;
+  const seconds = Math.floor(secondsInput - hours * oneHour - minutes * oneMin);
 
   return `${makeTwoDigit(hours)}:${makeTwoDigit(minutes)}:${makeTwoDigit(
     seconds

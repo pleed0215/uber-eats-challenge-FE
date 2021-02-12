@@ -21,6 +21,7 @@ import {
 import { ButtonInactivable } from "../../components/ButtonInactivable";
 import { Loader } from "../../components/Loader";
 import { LoaderWithLogo } from "../../components/LoaderWithLogo";
+import { BASE_URL } from "../../utils";
 import { GQL_GET_EPISODE } from "../home/episode";
 import { GQL_GET_EPISODES } from "../home/podcast";
 
@@ -163,13 +164,29 @@ export const DoEpisode = () => {
       let url, playLength;
 
       // TODO: playFile will contain audio file.
-      // How to upload audio file???? or ... if in case, lack of time,... use no upload and take fake audio file.
-      playLength = Math.floor(Math.random() * 3600);
+      console.log(playFile);
+      if (playFile.length > 0) {
+        setIsSubmitting(true);
+        const actualFile = playFile[0];
+        const formBody = new FormData();
+        formBody.append("file", actualFile);
+        const { url: fileUrl } = await (
+          await fetch(`https://${BASE_URL}/upload`, {
+            method: "POST",
+            body: formBody,
+          })
+        ).json();
+        url = fileUrl;
+        console.log(url);
+        const audio = new Audio(actualFile.name);
+        audio.load();
+        playLength = audio.duration;
+      }
 
       if (job === "create") {
         setIsSubmitting(true);
         createEpisode({
-          variables: { input: { ...input, podcastId: +id, playLength } },
+          variables: { input: { ...input, podcastId: +id, playLength, url } },
         });
       } else if (job === "update") {
         setIsSubmitting(true);
@@ -180,6 +197,7 @@ export const DoEpisode = () => {
               podcastId: +id,
               episodeId: +episodeId,
               playLength,
+              url,
             },
           },
         });
