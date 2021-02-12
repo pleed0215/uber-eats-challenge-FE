@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header } from "../components/Header";
 
@@ -19,6 +19,22 @@ import { useMe } from "../hooks/useMe";
 import { UserRole } from "../codegen/globalTypes";
 import { LoaderWithLogo } from "../components/LoaderWithLogo";
 import { HostEpisodePage } from "../pages/host/host-episode";
+import { PodcastPlayer } from "../components/PodcastPlayer";
+
+interface IPlayerContext {
+  isPlaying: boolean;
+  isShowing: boolean;
+  playLength: number | null;
+  title: string | null;
+  fileUrl: string | null;
+  setIsPlaying: React.Dispatch<boolean>;
+  setIsShowing: React.Dispatch<boolean>;
+  setPlayLength: React.Dispatch<number | null>;
+  setFileUrl: React.Dispatch<string | null>;
+  setTitle: React.Dispatch<string | null>;
+}
+
+export const PlayerContext = createContext<IPlayerContext | null>(null);
 
 interface HostRoute {
   route: string;
@@ -38,6 +54,11 @@ const hostRoutes: Array<HostRoute> = [
 
 export const LoggedInRouter = () => {
   const { data, loading } = useMe();
+  const [isShowing, setIsShowing] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [title, setTitle] = useState<string | null>(null);
+  const [playLength, setPlayLength] = useState<number | null>(0);
+  const [fileUrl, setFileUrl] = useState<string | null>(null);
 
   if (loading && !data) {
     return (
@@ -48,47 +69,63 @@ export const LoggedInRouter = () => {
   }
 
   return (
-    <Router>
-      <Header />
-      <Switch>
-        {data?.me.role === UserRole.Host &&
-          hostRoutes.map((route, index) => (
-            <Route path={route.route} key={`host-route-${index}`} exact>
-              <route.Component />
-            </Route>
-          ))}
-        <Route path="/user/:id" exact>
-          <UserPage isSelf={false} />
-        </Route>
-        <Route path="/my-page/edit" exact>
-          <EditProfilePage />
-        </Route>
-        <Route path="/my-page" exact>
-          <UserPage isSelf={true} />
-        </Route>
-        <Route path="/find" exact>
-          <SearchPage />
-        </Route>
-        <Route path="/category" exact>
-          <CategoryPage />
-        </Route>
-        <Route path="/podcast/:podcastId/episodes/:episodeId" exact>
-          <EpisodePage />
-        </Route>
-        <Route path="/podcast/:id" exact>
-          <PodcastPage />
-        </Route>
-        <Route path="/logout" exact>
-          <LogoutPage />
-        </Route>
-        <Route path="/" exact>
-          <HomePage />
-        </Route>
-        <Route>
-          <PageNotFound />
-        </Route>
-      </Switch>
-      <Footer />
-    </Router>
+    <PlayerContext.Provider
+      value={{
+        isShowing,
+        isPlaying,
+        playLength,
+        fileUrl,
+        title,
+        setIsShowing,
+        setIsPlaying,
+        setPlayLength,
+        setFileUrl,
+        setTitle,
+      }}
+    >
+      <Router>
+        <Header />
+        <Switch>
+          {data?.me.role === UserRole.Host &&
+            hostRoutes.map((route, index) => (
+              <Route path={route.route} key={`host-route-${index}`} exact>
+                <route.Component />
+              </Route>
+            ))}
+          <Route path="/user/:id" exact>
+            <UserPage isSelf={false} />
+          </Route>
+          <Route path="/my-page/edit" exact>
+            <EditProfilePage />
+          </Route>
+          <Route path="/my-page" exact>
+            <UserPage isSelf={true} />
+          </Route>
+          <Route path="/find" exact>
+            <SearchPage />
+          </Route>
+          <Route path="/category" exact>
+            <CategoryPage />
+          </Route>
+          <Route path="/podcast/:podcastId/episodes/:episodeId" exact>
+            <EpisodePage />
+          </Route>
+          <Route path="/podcast/:id" exact>
+            <PodcastPage />
+          </Route>
+          <Route path="/logout" exact>
+            <LogoutPage />
+          </Route>
+          <Route path="/" exact>
+            <HomePage />
+          </Route>
+          <Route>
+            <PageNotFound />
+          </Route>
+        </Switch>
+        <PodcastPlayer />
+        <Footer />
+      </Router>
+    </PlayerContext.Provider>
   );
 };

@@ -57,7 +57,7 @@ export const GQL_GET_EPISODES = gql`
   ${FRAGMENT_EPISODE}
 `;
 
-const GQL_GET_REVIEWS = gql`
+export const GQL_GET_REVIEWS = gql`
   query QuerySeeReviews($podcastId: Int!, $page: Int!) {
     seePodcastReviews(input: { podcastId: $podcastId, page: $page }) {
       ok

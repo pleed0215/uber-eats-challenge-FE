@@ -7,5 +7,11 @@ import { LoggedOutRouter } from "../routes/logged.out.route";
 export default function App() {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
 
-  return isLoggedIn ? <LoggedInRouter /> : <LoggedOutRouter />;
+  return isLoggedIn ? (
+    <div className="relative">
+      <LoggedInRouter />
+    </div>
+  ) : (
+    <LoggedOutRouter />
+  );
 }

@@ -6,6 +6,9 @@ module.exports = {
       half: "50vh",
       "1/2": "50%",
     },
+    fontFmaily: {
+      digital: ["Digital"],
+    },
     extend: {},
   },
   variants: {},

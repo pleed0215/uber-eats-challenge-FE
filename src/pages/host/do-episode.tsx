@@ -175,7 +175,12 @@ export const DoEpisode = () => {
         setIsSubmitting(true);
         updateEpisode({
           variables: {
-            input: { ...input, podcastId: +id, episodeId: +episodeId },
+            input: {
+              ...input,
+              podcastId: +id,
+              episodeId: +episodeId,
+              playLength,
+            },
           },
         });
       }
