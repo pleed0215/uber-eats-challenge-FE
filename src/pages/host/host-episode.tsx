@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
 
 import {
   QueryGetPodcast,
@@ -27,11 +27,37 @@ import {
   QuerySeeReviewsVariables,
 } from "../../codegen/QuerySeeReviews";
 import { GQL_GET_REVIEWS } from "../home/podcast";
+import {
+  GetPodcastListeners,
+  GetPodcastListenersVariables,
+} from "../../codegen/GetPodcastListeners";
+
+const GQL_GET_LISTENERS = gql`
+  query GetPodcastListeners($input: GetPodcastListenersInput!) {
+    getPodcastListeners(input: $input) {
+      ok
+      error
+      totalPage
+      totalCount
+      currentCount
+      currentPage
+      listeners {
+        id
+        email
+        name
+        portrait
+        role
+      }
+    }
+  }
+`;
 
 export const HostEpisodePage = () => {
   const { id } = useParams<{ id: string }>();
   const [page, setPage] = useState(1);
-  const [whichTab, setWhichTab] = useState<"episodes" | "reviews">("episodes");
+  const [whichTab, setWhichTab] = useState<
+    "episodes" | "reviews" | "listeners"
+  >("episodes");
 
   const { data: podcast, loading: loadingPodcast } = useQuery<
     QueryGetPodcast,
@@ -45,6 +71,13 @@ export const HostEpisodePage = () => {
     GQL_GET_EPISODES
   );
 
+  const [
+    getListeners,
+    { data: listeners, loading: loadingListeners },
+  ] = useLazyQuery<GetPodcastListeners, GetPodcastListenersVariables>(
+    GQL_GET_LISTENERS
+  );
+
   useEffect(() => {
     if (whichTab === "episodes") {
       getEpisodes({
@@ -53,8 +86,10 @@ export const HostEpisodePage = () => {
           page,
         },
       });
-    } else {
+    } else if (whichTab === "reviews") {
       getReviews({ variables: { podcastId: +id, page } });
+    } else {
+      getListeners({ variables: { input: { podcastId: +id, page } } });
     }
   }, [whichTab, page]);
 
@@ -66,28 +101,39 @@ export const HostEpisodePage = () => {
   };
 
   const onNext = () => {
-    if (episodes && reviews) {
-      const totalPage =
-        whichTab === "episodes"
-          ? episodes?.getEpisodes?.totalPage
-          : reviews?.seePodcastReviews.totalPage;
-      if (page < (totalPage || 0)) {
-        setPage(page + 1);
-      }
+    let totalPage;
+    if (whichTab === "episodes") {
+      totalPage = episodes?.getEpisodes?.totalPage;
+    } else if (whichTab === "reviews") {
+      totalPage = reviews?.seePodcastReviews.totalPage;
+    } else {
+      totalPage = listeners?.getPodcastListeners.totalPage;
     }
+
+    if (page < (totalPage || 0)) {
+      setPage(page + 1);
+    }
+
     window.scrollTo(0, 0);
   };
 
   const onEpisodesClick = () => {
-    if (whichTab === "reviews") {
+    if (whichTab !== "episodes") {
       setWhichTab("episodes");
       setPage(1);
     }
   };
 
   const onReviewsClick = () => {
-    if (whichTab === "episodes") {
+    if (whichTab !== "reviews") {
       setWhichTab("reviews");
+      setPage(1);
+    }
+  };
+
+  const onListenersClick = () => {
+    if (whichTab !== "listeners") {
+      setWhichTab("listeners");
       setPage(1);
     }
   };
@@ -99,7 +145,9 @@ export const HostEpisodePage = () => {
 
   return (
     <div className="w-screen min-h-screen flex justify-center bg-gray-800">
-      {(loadingPodcast || loadingEpisodes) && <LoaderWithLogo />}
+      {(loadingPodcast || loadingEpisodes || loadingListeners) && (
+        <LoaderWithLogo />
+      )}
       {!loadingPodcast && !loadingEpisodes && (
         <div className="layout__container   flex flex-col mt-12 px-2">
           <h4 className="text-xl font-bold text-white">
@@ -159,7 +207,7 @@ export const HostEpisodePage = () => {
           {!loadingPodcast && (
             <div className="h-10 border-b border-purple-200 mt-10 flex justify-center items-center text-white mb-4">
               <button
-                className={`py-2 px-10 ${
+                className={`py-2 px-8 mr-1 focus:outline-none ${
                   whichTab === "episodes"
                     ? "bg-purple-600 cursor-default underline font-semibold"
                     : "bg-purple-400"
@@ -169,7 +217,7 @@ export const HostEpisodePage = () => {
                 Episodes
               </button>
               <button
-                className={`px-10 py-2 text-white  ${
+                className={`px-8 py-2 text-white mr-1 focus:outline-none ${
                   whichTab === "reviews"
                     ? "bg-purple-600 cursor-default underline font-semibold"
                     : "bg-purple-400"
@@ -177,6 +225,16 @@ export const HostEpisodePage = () => {
                 onClick={onReviewsClick}
               >
                 Reviews
+              </button>
+              <button
+                className={`px-8 py-2 text-white focus:outline-none ${
+                  whichTab === "listeners"
+                    ? "bg-purple-600 cursor-default underline font-semibold"
+                    : "bg-purple-400"
+                } text-white rounded-tr-lg rounded-tl-lg `}
+                onClick={onListenersClick}
+              >
+                Listeners
               </button>
             </div>
           )}
@@ -251,6 +309,7 @@ export const HostEpisodePage = () => {
                     onNext={onNext}
                     onPrev={onPrev}
                     currentPage={page}
+                    loading={loadingEpisodes}
                     totalPage={episodes?.getEpisodes.totalPage}
                   />
                 )}
@@ -261,11 +320,13 @@ export const HostEpisodePage = () => {
             <div className="w-full flex flex-col">
               <h4 className="text-xl font-bold text-white">Reviews</h4>
 
-              <p className="text-md text-white">
-                {reviews?.seePodcastReviews.totalCount === 0
-                  ? "... No Reviews... "
-                  : `${episodes?.getEpisodes.totalCount} Review(s)`}
-              </p>
+              {!loadingReview && (
+                <p className="text-md text-white">
+                  {reviews?.seePodcastReviews.totalCount === 0
+                    ? "... No Reviews... "
+                    : `${reviews?.seePodcastReviews.totalCount} Review(s)`}
+                </p>
+              )}
 
               {reviews?.seePodcastReviews.totalCount !== 0 && (
                 <table
@@ -308,11 +369,79 @@ export const HostEpisodePage = () => {
               )}
 
               <div className="mt-2 self-center">
-                {episodes?.getEpisodes?.totalPage !== 0 && (
+                {reviews?.seePodcastReviews.totalPage !== 0 && (
                   <Pagination
                     onNext={onNext}
                     onPrev={onPrev}
                     currentPage={page}
+                    loading={loadingReview}
+                    totalPage={reviews?.seePodcastReviews.totalPage}
+                  />
+                )}
+              </div>
+            </div>
+          )}
+          {whichTab === "listeners" && (
+            <div className="w-full flex flex-col">
+              <h4 className="text-xl font-bold text-white">Listeners</h4>
+              {!loadingListeners && (
+                <p className="text-md text-white">
+                  {listeners?.getPodcastListeners.totalCount === 0
+                    ? "...Sorry.. No Listners yet..."
+                    : `${listeners?.getPodcastListeners.totalCount} Listener(s)`}
+                </p>
+              )}
+
+              {listeners?.getPodcastListeners.totalCount !== 0 && (
+                <table
+                  className="table-auto border-collapse text-white border w-full rounded-lg mt-4"
+                  cellPadding="8px"
+                >
+                  <thead>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                  </thead>
+                  <tbody className="text-xs text-center">
+                    {listeners?.getPodcastListeners.listeners?.map(
+                      (listener) => (
+                        <tr
+                          key={listener.id}
+                          className="border y-1 hover:bg-purple600 hover:text-white"
+                        >
+                          <td>{listener.id}</td>
+                          <td className="flex items-center">
+                            <Link
+                              to={`/user/${listener.id}`}
+                              className="truncate flex items-center"
+                            >
+                              <div
+                                className={`w-5 h-5 mr-1 bg-cover bg-center rounded-full bg-purple-100`}
+                                style={useBackgroundImageOrDefaultUrl(
+                                  listener.portrait
+                                )}
+                              />
+                              {listener.email}
+                            </Link>
+                          </td>
+                          <td>{listener.name}</td>
+
+                          <td>{listener.role}</td>
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </table>
+              )}
+
+              <div className="mt-2 self-center">
+                {listeners?.getPodcastListeners.totalPage !== 0 && (
+                  <Pagination
+                    onNext={onNext}
+                    onPrev={onPrev}
+                    currentPage={page}
+                    loading={loadingListeners}
                     totalPage={episodes?.getEpisodes.totalPage}
                   />
                 )}

@@ -40,6 +40,12 @@ export interface EpisodesSearchInput {
   episodeId: number;
 }
 
+export interface GetPodcastListenersInput {
+  page?: number | null;
+  pageSize?: number | null;
+  podcastId: number;
+}
+
 export interface GetPodcastsByCategoryInput {
   page?: number | null;
   pageSize?: number | null;

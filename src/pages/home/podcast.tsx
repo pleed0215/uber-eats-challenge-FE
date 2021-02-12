@@ -163,7 +163,7 @@ export const PodcastPage = () => {
         {!loadingPodcast && !loadingEpispde && !loadingReview && (
           <div className="h-10 border-b border-purple-200 mt-10 flex justify-center items-center text-white mb-4">
             <button
-              className={`py-2 px-10 ${
+              className={`py-2 px-10 focus:outline-none ${
                 whichTab === "episodes"
                   ? "bg-purple-600 cursor-default underline font-semibold"
                   : "bg-purple-400"
@@ -173,7 +173,7 @@ export const PodcastPage = () => {
               Episodes
             </button>
             <button
-              className={`px-10 py-2 text-white  ${
+              className={`px-10 py-2 text-white focus:outline-none  ${
                 whichTab === "reviews"
                   ? "bg-purple-600 cursor-default underline font-semibold"
                   : "bg-purple-400"
