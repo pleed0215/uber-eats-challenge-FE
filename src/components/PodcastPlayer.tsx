@@ -13,6 +13,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { Link } from "react-router-dom";
 import { MarkAsPlay, MarkAsPlayVariables } from "../codegen/MarkAsPlay";
 import { GQL_GET_EPISODE } from "../pages/home/episode";
 import { PlayerContext } from "../routes/logged.in.route";
@@ -128,9 +129,21 @@ export const PodcastPlayer = () => {
           <audio ref={audio}>You're browser does not support audio tag.</audio>
           <div className="flex justify-center text-sm w-full mb-2">
             {loading && <Loader />}
-            {!loading &&
-              playerState?.episode !== null &&
-              playerState?.episode?.title}
+            {!loading && playerState?.episode !== null && (
+              <Link
+                to={`/podcast/${playerState.episode?.podcast.id}/episodes/${playerState.episode?.id}`}
+              >
+                <div className="flex flex-col text-xs font-bold items-center">
+                  <p>
+                    <strong>Podcast: </strong>
+                    {playerState?.episode?.podcast.title}
+                  </p>
+                  <p className="text-xs font-thin">
+                    {playerState?.episode?.title}
+                  </p>
+                </div>
+              </Link>
+            )}
           </div>
           <div className="flex justify-between items-center">
             <button className="mr-2 focus:outline-none" onClick={onPlayClick}>

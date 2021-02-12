@@ -11,6 +11,7 @@
   "dependencies": {
     "@apollo/client": "3.3.7",
     "@craco/craco": "^6.1.0",
+    "@ffprobe-installer/ffprobe": "^1.1.0",
     "@fortawesome/fontawesome-svg-core": "1.2.34",
     "@fortawesome/free-solid-svg-icons": "5.15.2",
     "@fortawesome/react-fontawesome": "0.1.14",
@@ -19,6 +20,7 @@
     "@types/react-router-dom": "5.1.7",
     "apollo": "2.32.1",
     "autoprefixer": "^9.8.6",
+    "get-audio-duration": "^2.0.3",
     "graphql": "15.4.0",
     "postcss": "^7.0.35",
     "react": "17.0.1",

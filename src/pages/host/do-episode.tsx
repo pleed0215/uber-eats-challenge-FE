@@ -24,6 +24,8 @@ import { LoaderWithLogo } from "../../components/LoaderWithLogo";
 import { BASE_URL } from "../../utils";
 import { GQL_GET_EPISODE } from "../home/episode";
 import { GQL_GET_EPISODES } from "../home/podcast";
+import { GQL_RECENTLY_EPISODES } from "../home/home";
+import { getAudioDurationInSeconds } from "get-audio-duration";
 
 const GQL_CREATE_EPISODE = gql`
   mutation CreateEpisode($input: CreateEpisodeInput!) {
@@ -97,6 +99,12 @@ export const DoEpisode = () => {
             page: 1,
           },
         },
+        {
+          query: GQL_RECENTLY_EPISODES,
+          variables: {
+            page: 1,
+          },
+        },
       ],
     }
   );
@@ -115,6 +123,12 @@ export const DoEpisode = () => {
             episodeId: +episodeId,
           },
         },
+        {
+          query: GQL_RECENTLY_EPISODES,
+          variables: {
+            page: 1,
+          },
+        },
       ],
     }
   );
@@ -130,6 +144,12 @@ export const DoEpisode = () => {
           query: GQL_GET_EPISODES,
           variables: {
             podcastId: +id,
+            page: 1,
+          },
+        },
+        {
+          query: GQL_RECENTLY_EPISODES,
+          variables: {
             page: 1,
           },
         },
@@ -164,7 +184,6 @@ export const DoEpisode = () => {
       let url, playLength;
 
       // TODO: playFile will contain audio file.
-      console.log(playFile);
       if (playFile.length > 0) {
         setIsSubmitting(true);
         const actualFile = playFile[0];
@@ -177,10 +196,7 @@ export const DoEpisode = () => {
           })
         ).json();
         url = fileUrl;
-        console.log(url);
-        const audio = new Audio(actualFile.name);
-        audio.load();
-        playLength = audio.duration;
+        playLength = await getAudioDurationInSeconds(url);
       }
 
       if (job === "create") {

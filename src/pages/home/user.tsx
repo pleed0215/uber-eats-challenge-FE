@@ -12,11 +12,7 @@ import { LoaderWithLogo } from "../../components/LoaderWithLogo";
 import { Pagination } from "../../components/Pagination";
 import { PodcastList } from "../../components/PodcastList";
 import { Profile } from "../../components/Profile";
-import {
-  FRAGMENT_EPISODE,
-  FRAGMENT_PODCAST,
-  FRAGMENT_REVIEW,
-} from "../../fragments";
+import { FRAGMENT_PODCAST } from "../../fragments";
 import { useMe } from "../../hooks/useMe";
 
 const GQL_SEE_SUBSCRIPTIONS = gql`

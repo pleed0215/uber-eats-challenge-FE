@@ -43,7 +43,7 @@ const GQL_RECENTLY_PODCASTS = gql`
   ${FRAGMENT_PODCAST}
 `;
 
-const GQL_RECENTLY_EPISODES = gql`
+export const GQL_RECENTLY_EPISODES = gql`
   query QueryRecentlyEpisodes($page: Int!) {
     getRecentlyEpisodes(input: { page: $page, pageSize: 10 }) {
       ok
