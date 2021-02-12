@@ -77,4 +77,20 @@ export function useBackgroundImageOrDefaultUrl(imageUrl?: string | null) {
   return object;
 }
 
+export function makeTwoDigit(input: number) {
+  return input > 9 ? `${input}` : `0${input}`;
+}
+
+export function secondsToString(secondsInput: number) {
+  const oneHour = 3600;
+  const oneMin = 60;
+  const hours = Math.floor(secondsInput / oneHour);
+  const minutes = Math.floor((secondsInput - hours * oneHour) / oneMin);
+  const seconds = secondsInput - hours * oneHour - minutes * oneMin;
+
+  return `${makeTwoDigit(hours)}:${makeTwoDigit(minutes)}:${makeTwoDigit(
+    seconds
+  )}`;
+}
+
 export const BASE_URL = "obscure-dawn-29050.herokuapp.com";
