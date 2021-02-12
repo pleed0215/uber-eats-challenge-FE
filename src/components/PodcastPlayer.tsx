@@ -2,6 +2,7 @@ import {
   faPauseCircle,
   faPlayCircle,
   faVolumeUp,
+  faWindowClose,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useRef, useState } from "react";
@@ -19,10 +20,15 @@ export const PodcastPlayer = () => {
 
   return (
     <div className="flex justify-center items-center inset-x-0 bottom-0 fixed">
-      <div
-        className="w-full max-w-sm bg-red-600 text-white py-3 px-3 rounded-t-xl flex flex-col"
-        onClick={() => toggleShowing()}
-      >
+      <div className="w-full max-w-sm bg-red-600 text-white py-3 px-3 rounded-t-xl flex flex-col relative">
+        <button
+          className="absolute w-8 h-8 right-0 top-0 hover:text-purple-400 duration-300 transition  focus:outline-none"
+          onClick={() => {
+            toggleShowing();
+          }}
+        >
+          <FontAwesomeIcon icon={faWindowClose} size="lg" />
+        </button>
         <div className="flex justify-center text-sm w-full mb-2">
           {playerState?.title !== null
             ? playerState?.title

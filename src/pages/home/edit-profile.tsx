@@ -85,7 +85,6 @@ export const EditProfilePage = () => {
         editProfileInput.password !== "" &&
         editProfileInput.password2 !== ""
       ) {
-        console.log("hello");
         if (editProfileInput.password === editProfileInput.password2) {
           const { password2, portrait: _, ...input } = editProfileInput;
           setIsSubmitting(true);

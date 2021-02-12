@@ -112,7 +112,7 @@ export const Header = () => {
   };
 
   return (
-    <div className="w-full flex justify-center bg-gray-800 shadow-lg border-b-2 border-gray-500 ">
+    <div className="w-screen flex justify-center bg-gray-800 shadow-lg border-b-2 border-gray-500 ">
       <div className="layout__container xl:max-w-screen-lg lg:max-w-screen-md  md:flex sm:hidden hidden  px-4 pt-4 bg-gray-800 justify-between">
         <div className="flex font-bold text-white -mb-1 w-full max-w-2xl">
           <Link to="/" className="mr-6">
